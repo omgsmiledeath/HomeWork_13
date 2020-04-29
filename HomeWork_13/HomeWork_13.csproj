@@ -70,12 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\Bank.cs" />
-    <Compile Include="Models\EntityAccount.cs" />
-    <Compile Include="Models\ITransaction.cs" />
-    <Compile Include="Models\PersonAccount.cs" />
-    <Compile Include="Models\Transaction.cs" />
-    <Compile Include="Models\VipAccount.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,5 +95,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
