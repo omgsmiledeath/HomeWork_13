@@ -14,25 +14,22 @@ namespace HomeWork_13.Models
             idList = new List<long>();
         }
         private double balance;//текущий баланс на счету
-        private string owner; //владелец счета
-        private string id; // ID счета
+        private long id; // ID счета
         private double interestRate;
 
         public double Balance { get => balance; set => balance = value; }
-        public string Owner { get => owner; set => owner = value; }
        
         /// <summary>
         /// Конструктор базового класса 
         /// </summary>
         /// <param name="amount"></param>
-        /// <param name="owner"></param>
-        public Account(double amount,string owner)
+
+        public Account(double amount)
         {
             Balance = amount;
-            Owner = owner;
             interestRate = 4.5;
-
-
+            id = idList.Count;
+            idList.Add(id);
         }
     }
 }
