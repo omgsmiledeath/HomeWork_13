@@ -15,8 +15,8 @@ namespace HomeWork_13.Models
         }
         private double balance;//текущий баланс на счету
         private long id; // ID счета
-        private double interestRate;
-
+        protected double interestRate;
+        protected List<string> LogTransaction;
         public double Balance { get => balance; set => balance = value; }
        
         /// <summary>
@@ -30,6 +30,30 @@ namespace HomeWork_13.Models
             interestRate = 4.5;
             id = idList.Count;
             idList.Add(id);
+            LogTransaction = new List<string>();
+        }
+
+        public virtual bool Withdraw(Account target,double amount)
+        {
+            if((Balance - amount)>=0)
+            {
+                Balance -= amount;
+                target.Deposit(amount);
+                LogTransaction.Add($"Withdrawn {amount} to {target} at {DateTime.Now} ");
+                return true;
+            }
+            return false;
+        }
+
+        public void Deposit(double amount)
+        {
+            balance += amount;
+            LogTransaction.Add($"Added {amount} at {DateTime.Now}");
+        }
+
+        public override string ToString()
+        {
+            return $"Account number :{this.id}";
         }
     }
 }
