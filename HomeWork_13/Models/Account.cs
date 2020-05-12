@@ -8,16 +8,21 @@ namespace HomeWork_13.Models
 {
     public class Account
     {
-        static List<long> idList;
+        
+        static List<long> idList; //List всех айди аккаунтов
+        /// <summary>
+        /// Статический конструктор 
+        /// </summary>
         static Account()
         {
             idList = new List<long>();
         }
+
         private double balance;//текущий баланс на счету
-        private long id; // ID счета
-        protected double interestRate;
-        protected List<string> LogTransaction;
-        public double Balance { get => balance; set => balance = value; }
+        protected long id; // ID счета
+
+        protected List<string> LogTransaction; // Лог транзакций данного счета
+        public double Balance { get => balance; set => balance = value; } // Автосвойсвто для баланса
        
         /// <summary>
         /// Конструктор базового класса 
@@ -27,12 +32,17 @@ namespace HomeWork_13.Models
         public Account(double amount)
         {
             Balance = amount;
-            interestRate = 4.5;
             id = idList.Count;
             idList.Add(id);
             LogTransaction = new List<string>();
         }
 
+        /// <summary>
+        /// Свойство для перевода денег с текущего счета на другой
+        /// </summary>
+        /// <param name="target">Аккаунт на который переводятся средства</param>
+        /// <param name="amount">Сумма</param>
+        /// <returns></returns>
         public virtual bool Withdraw(Account target,double amount)
         {
             if((Balance - amount)>=0)
@@ -44,16 +54,23 @@ namespace HomeWork_13.Models
             }
             return false;
         }
-
-        public void Deposit(double amount)
+        /// <summary>
+        /// Свойство для пополнения счета
+        /// </summary>
+        /// <param name="amount"></param>
+        public virtual void Deposit(double amount)
         {
             balance += amount;
             LogTransaction.Add($"Added {amount} at {DateTime.Now}");
         }
 
+        /// <summary>
+        /// Текстовое представление аккаунта
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
-            return $"Account number :{this.id}";
+            return $"Account number :{this.id} has {this.Balance}";
         }
     }
 }

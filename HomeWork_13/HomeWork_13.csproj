@@ -75,6 +75,7 @@
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\CreditAccount.cs" />
     <Compile Include="Models\SaveAccount.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
