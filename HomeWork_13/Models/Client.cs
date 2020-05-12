@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public class Client
+    public class Client  
+
     {
         static long id_count;
 
@@ -25,6 +26,7 @@ namespace HomeWork_13.Models
         public string Address { get => address; set => address = value; }
         public string Phone_number { get => phone_number; set => phone_number = value; }
 
+
         public Client(string name,string addr,string phone)
         {
             Client_full_name = name;
@@ -32,8 +34,12 @@ namespace HomeWork_13.Models
             Phone_number = phone;
             loyality = 0;
             id = ++id_count;
+
         }
 
-
     }
+
+
+
+    
 }

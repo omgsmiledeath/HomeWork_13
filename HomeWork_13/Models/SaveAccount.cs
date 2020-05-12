@@ -13,11 +13,15 @@ namespace HomeWork_13.Models
         private int mounts;
         private double interestBalance;
         private double interestRate;
+
+        public DateTime StartInvestmentDate { get => startInvestmentDate; set => startInvestmentDate = value; }
+        public DateTime CompleteInvestmentDate { get => completeInvestmentDate; set => completeInvestmentDate = value; }
+
         public SaveAccount(double amount,int mounts) : base(amount)
         {
             this.mounts = mounts;
-            if (mounts > 6) interestRate = 4.5;
-            else interestRate = 3;
+            if (mounts > 6) interestRate = 12;
+            else interestRate = 5;
         }
 
         
@@ -31,8 +35,8 @@ namespace HomeWork_13.Models
         {
             if((Balance-amount)>=0)
             {
-                startInvestmentDate = DateTime.Now;
-                completeInvestmentDate = DateTime.Now.AddMonths(mounts);
+                StartInvestmentDate = DateTime.Now;
+                CompleteInvestmentDate = DateTime.Now.AddMonths(mounts);
                 interestBalance += amount;
                 Balance -= amount;
                 LogTransaction.Add($"Investment {amount}");
@@ -43,7 +47,7 @@ namespace HomeWork_13.Models
 
         public bool CheckInvestment()
         {
-            if(DateTime.Now>completeInvestmentDate)
+            if(DateTime.Now>CompleteInvestmentDate)
             {
                 CompleteInvestment();
                 return true;
