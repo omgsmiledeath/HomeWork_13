@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public class Account
+    public abstract class Account
     {
         
         static List<long> idList; //List всех айди аккаунтов
@@ -23,7 +23,13 @@ namespace HomeWork_13.Models
 
         protected List<string> LogTransaction; // Лог транзакций данного счета
         public double Balance { get => balance; set => balance = value; } // Автосвойсвто для баланса
-       
+        public long ID
+        {
+            get
+            {
+                return id;
+            }
+        }
         /// <summary>
         /// Конструктор базового класса 
         /// </summary>

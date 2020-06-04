@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public class Client  
+    public abstract class Client  
 
     {
         static long id_count;
@@ -20,7 +21,7 @@ namespace HomeWork_13.Models
         private string address;
         private string phone_number;
         private double loyality;
-
+        private ObservableCollection<Account> AccountList;  
        
         public string Client_full_name { get => client_full_name; set => client_full_name = value; }
         public string Address { get => address; set => address = value; }
@@ -34,7 +35,25 @@ namespace HomeWork_13.Models
             Phone_number = phone;
             loyality = 0;
             id = ++id_count;
+            AccountList = new ObservableCollection<Account>();
+        }
 
+        public bool OpenDebit()
+        {
+            foreach(var el in AccountList)
+            {
+                if (el is SaveAccount) return false;
+            }
+            return true;
+        }
+
+        public bool OpenCredit()
+        {
+            foreach (var el in AccountList)
+            {
+                if (el is CreditAccount) return false;
+            }
+            return true;
         }
 
     }
