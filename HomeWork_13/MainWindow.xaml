@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeWork_13"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
    <!--Главный грид-->
     <Grid>
         <Grid.RowDefinitions>
@@ -29,10 +29,11 @@
             </Grid.ColumnDefinitions>
             <!--Управление страницами-->
             <StackPanel Orientation="Vertical">
-                
+                <Button Click="Button_Click">SaveAccount</Button>
+                <Button Click="Button_Click_1">CreditAccount</Button>
             </StackPanel>
             <!--Фрейм с выводимыми страницами -->
-            <Frame Grid.Column="1">
+            <Frame x:Name="MainFrame" Grid.Column="1">
                 
             </Frame>
             

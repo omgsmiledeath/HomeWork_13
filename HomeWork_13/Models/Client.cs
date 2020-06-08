@@ -14,7 +14,7 @@ namespace HomeWork_13.Models
 
         static Client()
         {
-            id_count=0;
+            id_count=1;
         }
         private long id;
         private string client_full_name;

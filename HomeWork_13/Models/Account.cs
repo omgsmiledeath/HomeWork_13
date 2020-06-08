@@ -38,7 +38,7 @@ namespace HomeWork_13.Models
         public Account(double amount)
         {
             Balance = amount;
-            id = idList.Count;
+            id = idList.Count+1;
             idList.Add(id);
             LogTransaction = new List<string>();
         }
