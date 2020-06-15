@@ -59,7 +59,7 @@ namespace HomeWork_13
 
             clients = new Clients(bank.AccountList);
             clients2 = new Clients(bank2.AccountList);
-
+            MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
