@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HomeWork_13.Models
 {
     class Bank <T>
-        where T : Account
+        where T : Client
     {
         private ObservableCollection<T> accountList = new ObservableCollection<T>();
 
