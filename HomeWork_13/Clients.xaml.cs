@@ -23,28 +23,28 @@ namespace HomeWork_13
     public partial class Clients: Page 
        
     {
-        private ObservableCollection<SaveAccount> accounts = new ObservableCollection<SaveAccount>();
-        private ObservableCollection<CreditAccount> accounts2 = new ObservableCollection<CreditAccount>();
+        private ObservableCollection<Client> accounts = new ObservableCollection<Client>();
+       // private ObservableCollection<CreditAccount> accounts2 = new ObservableCollection<CreditAccount>();
         public Clients()
         {
             InitializeComponent();
             
         }
 
-        public Clients(ObservableCollection<SaveAccount> accountlist) : base()
+        public Clients(ObservableCollection<Client> accountlist) : base()
         {
             InitializeComponent();
             this.accounts = accountlist;
 
             AccountListGrid.ItemsSource = accounts;
         }
-        public Clients(ObservableCollection<CreditAccount> accountlist) : base()
-        {
-            InitializeComponent();
-            this.accounts2 = accountlist;
-            AccountListGrid.ItemsSource = accounts2;
+        //public Clients(ObservableCollection<Client> accountlist) : base()
+        //{
+        //    InitializeComponent();
+        //    this.accounts2 = accountlist;
+        //    AccountListGrid.ItemsSource = accounts2;
 
-        }
+        //}
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

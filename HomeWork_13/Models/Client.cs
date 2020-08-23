@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public abstract class Client  
+    public class Client  
 
     {
         static long id_count;
 
         static Client()
         {
-            id_count=1;
+            id_count=0;
         }
+
         private long id;
         private string client_full_name;
         private string address;
@@ -26,7 +27,7 @@ namespace HomeWork_13.Models
         public string Client_full_name { get => client_full_name; set => client_full_name = value; }
         public string Address { get => address; set => address = value; }
         public string Phone_number { get => phone_number; set => phone_number = value; }
-
+        public long Id { get => id;  }
 
         public Client(string name,string addr,string phone)
         {
