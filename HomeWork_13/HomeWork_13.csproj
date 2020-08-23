@@ -78,9 +78,12 @@
   <ItemGroup>
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Bank.cs" />
+    <Compile Include="Models\Business.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\CreditAccount.cs" />
+    <Compile Include="Models\Individual.cs" />
     <Compile Include="Models\SaveAccount.cs" />
+    <Compile Include="Models\VipClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
