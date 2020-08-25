@@ -44,7 +44,9 @@ namespace HomeWork_13
 
 
             clients = new Clients(bank.AccountList);
-            
+            bank.AccountList[0].Phone_number = "888";
+
+            clients2 = new Clients(bank.AccountList);
             MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
@@ -57,7 +59,7 @@ namespace HomeWork_13
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-           
+            
             MainFrame.Content = clients2;
         }
     }

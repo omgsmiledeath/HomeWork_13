@@ -21,7 +21,7 @@ namespace HomeWork_13.Models
         private string client_full_name;
         private string address;
         private string phone_number;
-        private protected double loyality;
+        protected double loyality;
         private ObservableCollection<Account> AccountList;  
        
         public string Client_full_name { get => client_full_name; set => client_full_name = value; }
