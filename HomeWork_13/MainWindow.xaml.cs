@@ -38,7 +38,7 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            individualBank.AddAccount(new Individual("Петров В.С.", "Жопниково", "2281488"));
             MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 

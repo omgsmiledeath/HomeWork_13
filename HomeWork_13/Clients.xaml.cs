@@ -111,11 +111,20 @@ namespace HomeWork_13
                         e.Column.Header = "Форма";
                         e.Column.DisplayIndex = 5;
                         break;
-
+                    default:
+                        e.Column.Visibility = Visibility.Hidden;
+                        break;
 
                 }
             }
             
+        }
+
+        private void OpenCartInfo(object sender, RoutedEventArgs e)
+        {
+            var item = (Button)e.OriginalSource;
+            Carts carts = new Carts((Client)item.DataContext);
+            carts.Show();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

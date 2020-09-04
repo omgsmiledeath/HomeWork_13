@@ -22,14 +22,14 @@ namespace HomeWork_13.Models
         private string address;
         private string phone_number;
         protected double loyality;
-        private ObservableCollection<Account> AccountList;
+        private ObservableCollection<Account> carts;
 
 
         public long Id { get => id; }
         public string Client_full_name { get => client_full_name; set => client_full_name = value; }
         public string Address { get => address; set => address = value; }
         public string Phone_number { get => phone_number; set => phone_number = value; }
-        
+        public ObservableCollection<Account> Carts { get => carts;  }
 
         public Client(string name,string addr,string phone)
         {
@@ -37,12 +37,12 @@ namespace HomeWork_13.Models
             Address = addr;
             Phone_number = phone;
             id = ++id_count;
-            AccountList = new ObservableCollection<Account>();
+            carts = new ObservableCollection<Account>();
         }
 
         public bool OpenDebit()
         {
-            foreach(var el in AccountList)
+            foreach(var el in Carts)
             {
                 if (el is SaveAccount) return false;
             }
@@ -51,7 +51,7 @@ namespace HomeWork_13.Models
 
         public bool OpenCredit()
         {
-            foreach (var el in AccountList)
+            foreach (var el in Carts)
             {
                 if (el is CreditAccount) return false;
             }

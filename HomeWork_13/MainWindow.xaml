@@ -29,6 +29,7 @@
             </Grid.ColumnDefinitions>
             <!--Управление страницами-->
             <StackPanel Orientation="Vertical">
+                <TextBlock Text="Выбор отдела" TextWrapping="Wrap"/>
                 <Button Click="OpenIndividualClientsPage" 
                         Content="Обычные клиенты"/>
                 <Button Click="OpenBusinessClientsPage"
