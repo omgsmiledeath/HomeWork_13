@@ -32,5 +32,14 @@ namespace HomeWork_13
            // client.Carts.Add(new SaveAccount(123123,6));
             CartListGrid.ItemsSource= client.Carts;
         }
+        /// <summary>
+        /// Действие по нажатию кнопки открытия сберегательного счета
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenSave_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("wdadad");
+        }
     }
 }

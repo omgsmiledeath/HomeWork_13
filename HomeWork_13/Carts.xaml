@@ -6,11 +6,13 @@
         xmlns:local="clr-namespace:HomeWork_13"
         mc:Ignorable="d"
         Title="Carts" Height="450" Width="800">
-    <Grid>
-        <DataGrid x:Name="CartListGrid" 
+<Grid>
+        <StackPanel>
+            <DataGrid x:Name="CartListGrid" 
                      AutoGenerateColumns="True">
-           
-
-        </DataGrid>
+            </DataGrid>
+            <Button x:Name="OpenSave" Content="Открыть сберегательный счет" Click="OpenSave_Click"/>
+            <Button x:Name="OpenCredit" Content="Открыть кредитный счет"/>
+        </StackPanel>
     </Grid>
 </Window>
