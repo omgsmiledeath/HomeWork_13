@@ -21,48 +21,55 @@ namespace HomeWork_13
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Bank<Business> bank = new Bank<Business>();
-        private Bank<VipClient> bank2 = new Bank<VipClient>();
+        private Bank<Business> businessBank = new Bank<Business>(); //Отдел банка с бизнес клиентами
+        private Bank<VipClient> vipBank = new Bank<VipClient>(); // Отдел банка с вип клиентами
+        private Bank<Individual> individualBank = new Bank<Individual>(); // Отдел банка с обычными клиентами
 
-        Clients clients;
-        Clients clients2;
+        
         public MainWindow()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Обработка загрузки главного окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            double i = 100_000;
-            bank.AddAccount(new Business("111","222","8800223535","Vasia","OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
-
-
-            clients = new Clients(bank.AccountList);
             
-           
-            bank2.AddAccount(new VipClient("77", "222", "8800223535"));
-            clients2 = new Clients(bank2.AccountList);
             MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Обработка нажатия кнопки открытия страницы с обычными клиентами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenIndividualClientsPage(object sender, RoutedEventArgs e)
         {
             
-            MainFrame.Content = clients;
-           // MainFrame.Navigate(clients);
+            MainFrame.Content = new Clients(individualBank.AccountList);
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Обработка нажатия кнопки открытия страницы с бизнес клиентами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenBusinessClientsPage(object sender, RoutedEventArgs e)
         {
             
-            MainFrame.Content = clients2;
+            MainFrame.Content = new Clients(businessBank.AccountList);
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки открытия страницы с вип клиентами
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OpenVipClientsPage(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new Clients(vipBank.AccountList);
         }
     }
 }

@@ -24,13 +24,17 @@
         <!--Внутренний грид с ориентацией по страницами -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="122"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--Управление страницами-->
             <StackPanel Orientation="Vertical">
-                <Button Click="Button_Click">SaveAccount</Button>
-                <Button Click="Button_Click_1">CreditAccount</Button>
+                <Button Click="OpenIndividualClientsPage" 
+                        Content="Обычные клиенты"/>
+                <Button Click="OpenBusinessClientsPage"
+                        Content="Бизнес клиенты"/>
+                <Button Click="OpenVipClientsPage"
+                        Content="VIP клиенты" />
             </StackPanel>
             <!--Фрейм с выводимыми страницами -->
             <Frame x:Name="MainFrame" Grid.Column="1">
