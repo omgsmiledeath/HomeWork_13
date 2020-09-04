@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public class Client  
+    public abstract class Client  
 
     {
         static long id_count;
@@ -22,12 +22,14 @@ namespace HomeWork_13.Models
         private string address;
         private string phone_number;
         protected double loyality;
-        private ObservableCollection<Account> AccountList;  
-       
+        private ObservableCollection<Account> AccountList;
+
+
+        public long Id { get => id; }
         public string Client_full_name { get => client_full_name; set => client_full_name = value; }
         public string Address { get => address; set => address = value; }
         public string Phone_number { get => phone_number; set => phone_number = value; }
-        public long Id { get => id;  }
+        
 
         public Client(string name,string addr,string phone)
         {

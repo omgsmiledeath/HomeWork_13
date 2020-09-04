@@ -21,8 +21,9 @@ namespace HomeWork_13
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Bank<Client> bank = new Bank<Client>();
-        //private Bank<CreditAccount> bank2 = new Bank<CreditAccount>();
+        private Bank<Business> bank = new Bank<Business>();
+        private Bank<VipClient> bank2 = new Bank<VipClient>();
+
         Clients clients;
         Clients clients2;
         public MainWindow()
@@ -33,20 +34,21 @@ namespace HomeWork_13
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             double i = 100_000;
-            bank.AddAccount(new Client("111","222","8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
-            bank.AddAccount(new Client("111", "222", "8800223535"));
+            bank.AddAccount(new Business("111","222","8800223535","Vasia","OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
+            bank.AddAccount(new Business("111", "222", "8800223535", "Vasia", "OAO"));
 
 
             clients = new Clients(bank.AccountList);
-            bank.AccountList[0].Phone_number = "888";
-
-            clients2 = new Clients(bank.AccountList);
+            
+           
+            bank2.AddAccount(new VipClient("77", "222", "8800223535"));
+            clients2 = new Clients(bank2.AccountList);
             MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
