@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public abstract class Account
+    public abstract class Account : INotifyPropertyChanged
     {
-        
+        public enum AccountTypes
+        {
+            Debit = 0,
+            Credit = 1
+        }
+
+        private AccountTypes TypeOfAccount; 
         static List<long> idList; //List всех айди аккаунтов
         /// <summary>
         /// Статический конструктор 
@@ -20,9 +28,24 @@ namespace HomeWork_13.Models
 
         private double balance;//текущий баланс на счету
         protected long id; // ID счета
+       
 
         protected List<string> LogTransaction; // Лог транзакций данного счета
-        public double Balance { get => balance; set => balance = value; } // Автосвойсвто для баланса
+
+        public event PropertyChangedEventHandler PropertyChanged; //Евент изменении полей
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public double Balance
+        { get => balance;  // Автосвойсвто для баланса
+          set 
+            { balance = value;
+                OnPropertyChanged();
+            } 
+        } 
         public long ID
         {
             get
@@ -30,17 +53,23 @@ namespace HomeWork_13.Models
                 return id;
             }
         }
+
+        public AccountTypes TypeAcc
+        {
+            get => TypeOfAccount;
+        }
         /// <summary>
         /// Конструктор базового класса 
         /// </summary>
         /// <param name="amount"></param>
 
-        public Account(double amount)
+        public Account(double amount,AccountTypes type)
         {
             Balance = amount;
             id = idList.Count+1;
             idList.Add(id);
             LogTransaction = new List<string>();
+            TypeOfAccount = type;
         }
 
         /// <summary>

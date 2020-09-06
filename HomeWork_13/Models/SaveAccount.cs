@@ -17,11 +17,12 @@ namespace HomeWork_13.Models
         public DateTime StartInvestmentDate { get => startInvestmentDate; set => startInvestmentDate = value; }
         public DateTime CompleteInvestmentDate { get => completeInvestmentDate; set => completeInvestmentDate = value; }
 
-        public SaveAccount(double amount,int mounts) : base(amount)
+        public SaveAccount(double amount,int mounts) : base(amount,AccountTypes.Debit)
         {
             this.mounts = mounts;
             if (mounts > 6) interestRate = 12;
             else interestRate = 5;
+            
         }
 
         

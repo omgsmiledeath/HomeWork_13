@@ -12,11 +12,12 @@ namespace HomeWork_13.Models
         private double limit;
         private double creditBalance;
         private double creditRate;
-        public CreditAccount(double amount,double limit) : base(amount)
+        public CreditAccount(double amount,double limit) : base(amount,AccountTypes.Credit)
         {
             this.limit = limit;
             this.creditRate = 10;
             creditBalance = 0;
+            
         }
 
         public bool GetCredit(double amount)

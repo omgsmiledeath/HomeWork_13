@@ -12,7 +12,7 @@
                      AutoGenerateColumns="True">
             </DataGrid>
             <Button x:Name="OpenSave" Content="Открыть сберегательный счет" Click="OpenSave_Click"/>
-            <Button x:Name="OpenCredit" Content="Открыть кредитный счет"/>
+            <Button x:Name="OpenCredit" Content="Открыть кредитный счет" Click="OpenCredit_Click"/>
         </StackPanel>
     </Grid>
 </Window>

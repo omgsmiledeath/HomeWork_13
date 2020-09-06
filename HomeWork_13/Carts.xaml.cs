@@ -21,6 +21,7 @@ namespace HomeWork_13
     /// </summary>
     public partial class Carts : Window
     {
+        private Client currentClient; // Текущий клиент
         public Carts()
         {
             InitializeComponent();
@@ -29,8 +30,11 @@ namespace HomeWork_13
         public Carts(Client client) :base()
         {
             InitializeComponent();
-           // client.Carts.Add(new SaveAccount(123123,6));
+           
             CartListGrid.ItemsSource= client.Carts;
+            currentClient = client;
+
+            
         }
         /// <summary>
         /// Действие по нажатию кнопки открытия сберегательного счета
@@ -39,7 +43,18 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenSave_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("wdadad");
+            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Debit, 100, 6))
+                MessageBox.Show("Успех");
+            else
+                MessageBox.Show("Такой счет уже имеется");
+        }
+
+        private void OpenCredit_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Credit, 111, 6000000))
+                MessageBox.Show("Успех");
+            else
+                MessageBox.Show("Такой счет уже имеется");
         }
     }
 }
