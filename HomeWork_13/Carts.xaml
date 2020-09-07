@@ -7,12 +7,35 @@
         mc:Ignorable="d"
         Title="Carts" Height="450" Width="800">
 <Grid>
-        <StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
             <DataGrid x:Name="CartListGrid" 
-                     AutoGenerateColumns="True">
-            </DataGrid>
-            <Button x:Name="OpenSave" Content="Открыть сберегательный счет" Click="OpenSave_Click"/>
-            <Button x:Name="OpenCredit" Content="Открыть кредитный счет" Click="OpenCredit_Click"/>
+                     AutoGenerateColumns="True" SelectionChanged="CartListGrid_SelectionChanged"/>
+            <Button x:Name="OpenSave" 
+                    Content="Открыть сберегательный счет"
+                    Click="OpenSave_Click"
+                    Width="200" Height="30"
+                    Margin="10 10 10 10"/>
+            <Button x:Name="OpenCredit"
+                    Content="Открыть кредитный счет" 
+                    Click="OpenCredit_Click"
+                    Width="200" Height="30"
+                    Margin="10 0 10 10"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <ListBox x:Name="ListOfLogTransaction" 
+                     Width="300" Height="300">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
         </StackPanel>
     </Grid>
 </Window>

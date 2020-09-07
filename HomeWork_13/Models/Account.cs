@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -28,10 +29,10 @@ namespace HomeWork_13.Models
 
         private double balance;//текущий баланс на счету
         protected long id; // ID счета
-       
 
-        protected List<string> LogTransaction; // Лог транзакций данного счета
 
+        public ObservableCollection<string> LogTransaction; // Лог транзакций данного счета
+        
         public event PropertyChangedEventHandler PropertyChanged; //Евент изменении полей
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -43,7 +44,7 @@ namespace HomeWork_13.Models
         { get => balance;  // Автосвойсвто для баланса
           set 
             { balance = value;
-                OnPropertyChanged();
+                OnPropertyChanged("Balance");
             } 
         } 
         public long ID
@@ -65,10 +66,10 @@ namespace HomeWork_13.Models
 
         public Account(double amount,AccountTypes type)
         {
-            Balance = amount;
+            LogTransaction = new ObservableCollection<string>();
+            Deposit(amount);
             id = idList.Count+1;
             idList.Add(id);
-            LogTransaction = new List<string>();
             TypeOfAccount = type;
         }
 
@@ -84,7 +85,7 @@ namespace HomeWork_13.Models
             {
                 Balance -= amount;
                 target.Deposit(amount);
-                LogTransaction.Add($"Withdrawn {amount} to {target} at {DateTime.Now} ");
+                AddLog($"Withdrawn {amount} to {target} at {DateTime.Now} ");
                 return true;
             }
             return false;
@@ -96,7 +97,14 @@ namespace HomeWork_13.Models
         public virtual void Deposit(double amount)
         {
             balance += amount;
-            LogTransaction.Add($"Added {amount} at {DateTime.Now}");
+            AddLog($"Added {amount} at {DateTime.Now}");
+            
+        }
+
+        private void AddLog(string message)
+        {
+            LogTransaction.Add(message);
+            OnPropertyChanged("AddToLog");
         }
 
         /// <summary>
