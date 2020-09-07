@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Title="Carts" Height="450" Width="800">
 <Grid>
+    
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+    
         <StackPanel Grid.Column="0">
             <DataGrid x:Name="CartListGrid" 
                      AutoGenerateColumns="True" SelectionChanged="CartListGrid_SelectionChanged"/>
@@ -24,20 +26,34 @@
                     Click="OpenCredit_Click"
                     Width="200" Height="30"
                     Margin="10 0 10 10"/>
-            <Grid x:Name="ButtonGrid">
+            
+            <Grid x:Name="SaveAccountGrid" Visibility="Visible">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
 
-                <Button x:Name="DepositButton" 
-                        Grid.Column="0" Grid.Row="0"/>
-                <TextBox x:Name="DepositBox" 
+                <Button x:Name="DepositButton" Margin="5 5 5 5"
+                        Content="Внести на счет"
+                        Grid.Column="0" Grid.Row="0" Click="DepositButton_Click"/>
+                <TextBox x:Name="DepositBox" Margin="5 5 5 5"
                         Grid.Column="1" Grid.Row="0"/>
+                <Button x:Name="StartInvestmentButton" Margin="5 5 5 5"
+                        Content="Сделать вклад" Grid.Column="0" Grid.Row="1" Click="StartInvestmentButton_Click"/>
+                <TextBox x:Name="InvestmentBox" Margin="5 5 5 5"
+                        Grid.Column="1" Grid.Row="1"/>
+                <StackPanel x:Name="SaveAccountDatePanel" 
+                            Grid.ColumnSpan="2" Grid.Row="2">
+                <Button x:Name="CompleteInvestmentButton" Margin="25 5 25 5"
+                        Content="Забрать вклад" Click="CompleteInvestmentButton_Click" />
+                <DatePicker x:Name="InsvestmentDatePicker" />
+                </StackPanel>
             </Grid>
         </StackPanel>
     

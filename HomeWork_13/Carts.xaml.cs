@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace HomeWork_13
     public partial class Carts : Window
     {
         private Client currentClient; // Текущий клиент
+        
         public Carts()
         {
             InitializeComponent();
@@ -75,7 +77,16 @@ namespace HomeWork_13
                 {
                     
                     var currAccount = (Account)CartListGrid.SelectedItem;
-                    ListOfLogTransaction.ItemsSource = currAccount.LogTransaction.ToList();
+                    ListOfLogTransaction.ItemsSource = currAccount.LogTransaction;
+                    if (currAccount is SaveAccount)
+                    {
+                        SaveAccountGrid.Visibility = Visibility.Visible;
+                        InsvestmentDatePicker.Text = $"{(currAccount as SaveAccount).CompleteInvestmentDate}";
+                    }
+                    else
+                    {
+                        SaveAccountGrid.Visibility = Visibility.Collapsed;
+                    }
                    
                 }
             }
@@ -83,6 +94,37 @@ namespace HomeWork_13
             {
                 MessageBox.Show("Что то пошло не так");
             }
+        }
+
+        /// <summary>
+        /// Обработка нажатия по кнопке внесения средств
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DepositButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(!String.IsNullOrWhiteSpace(DepositBox.Text)) //Проверка на пустой TextBox
+            {
+                var currentAc = (Account)CartListGrid.SelectedItem;
+                double amount;
+                if (double.TryParse(DepositBox.Text, out amount))
+                    currentAc.Deposit(amount);
+                else
+                    MessageBox.Show("Введенное значение не верное");
+            }
+        }
+
+        private void StartInvestmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            var currentAc = (SaveAccount)CartListGrid.SelectedItem;
+            currentAc.StartInvestment(10);
+        }
+
+        private void CompleteInvestmentButton_Click(object sender, RoutedEventArgs e)
+        {
+            var currentAc = (SaveAccount)CartListGrid.SelectedItem;
+            if (!currentAc.CheckInvestment()) MessageBox.Show("Еще не время");
+                
         }
     }
 }

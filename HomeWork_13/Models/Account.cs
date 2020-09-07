@@ -19,17 +19,19 @@ namespace HomeWork_13.Models
 
         private AccountTypes TypeOfAccount; 
         static List<long> idList; //List всех айди аккаунтов
+        static List<string> allCartNumbers;
         /// <summary>
         /// Статический конструктор 
         /// </summary>
         static Account()
         {
             idList = new List<long>();
+            allCartNumbers = new List<string>();
         }
 
         private double balance;//текущий баланс на счету
         protected long id; // ID счета
-
+        private string cartNumber;
 
         public ObservableCollection<string> LogTransaction; // Лог транзакций данного счета
         
@@ -59,6 +61,9 @@ namespace HomeWork_13.Models
         {
             get => TypeOfAccount;
         }
+
+        public string CartNumber { get => cartNumber; }
+
         /// <summary>
         /// Конструктор базового класса 
         /// </summary>
@@ -71,6 +76,21 @@ namespace HomeWork_13.Models
             id = idList.Count+1;
             idList.Add(id);
             TypeOfAccount = type;
+            cartNumber = makeCartNumber();
+        }
+
+        private string makeCartNumber()
+        {
+            var rand = new Random((int)DateTime.Now.Ticks);
+            while(true)
+                {
+                string result = rand.Next(1000, 9999) + "-" + rand.Next(1000, 9999) + "-" + rand.Next(1000, 9999) + "-" + rand.Next(1000, 9999);
+                if (!allCartNumbers.Contains(result))
+                {
+                    return result;
+                }
+            }
+
         }
 
         /// <summary>
@@ -96,7 +116,7 @@ namespace HomeWork_13.Models
         /// <param name="amount"></param>
         public virtual void Deposit(double amount)
         {
-            balance += amount;
+            Balance += amount;
             AddLog($"Added {amount} at {DateTime.Now}");
             
         }
@@ -104,7 +124,7 @@ namespace HomeWork_13.Models
         private void AddLog(string message)
         {
             LogTransaction.Add(message);
-            OnPropertyChanged("AddToLog");
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(String)));
         }
 
         /// <summary>
