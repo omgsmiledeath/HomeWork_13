@@ -24,7 +24,23 @@
                     Click="OpenCredit_Click"
                     Width="200" Height="30"
                     Margin="10 0 10 10"/>
+            <Grid x:Name="ButtonGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                </Grid.RowDefinitions>
+
+                <Button x:Name="DepositButton" 
+                        Grid.Column="0" Grid.Row="0"/>
+                <TextBox x:Name="DepositBox" 
+                        Grid.Column="1" Grid.Row="0"/>
+            </Grid>
         </StackPanel>
+    
         <StackPanel Grid.Column="1">
             <ListBox x:Name="ListOfLogTransaction" 
                      Width="300" Height="300">
@@ -36,6 +52,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            
         </StackPanel>
     </Grid>
 </Window>
