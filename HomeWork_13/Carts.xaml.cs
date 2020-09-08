@@ -80,12 +80,21 @@ namespace HomeWork_13
                     ListOfLogTransaction.ItemsSource = currAccount.LogTransaction;
                     if (currAccount is SaveAccount)
                     {
-                        SaveAccountGrid.Visibility = Visibility.Visible;
-                        InsvestmentDatePicker.Text = $"{(currAccount as SaveAccount).CompleteInvestmentDate}";
+                        SaveAccPanel.Visibility = Visibility.Visible;
+                        if ((currAccount as SaveAccount).CompleteInvestmentDate == DateTime.MinValue)
+                        {
+                            InvestmentCompleteDateBox.Text = "Вклад еще не сделан";
+                            InvestmentStartDateBox.Text = "Вклад еще не сделан";
+                        }
+                        else
+                        {
+                            InvestmentCompleteDateBox.Text = $"{(currAccount as SaveAccount).CompleteInvestmentDate}";
+                            InvestmentStartDateBox.Text = $"{(currAccount as SaveAccount).StartInvestmentDate}";
+                        }
                     }
                     else
                     {
-                        SaveAccountGrid.Visibility = Visibility.Collapsed;
+                        SaveAccPanel.Visibility = Visibility.Collapsed;
                     }
                    
                 }
@@ -112,18 +121,48 @@ namespace HomeWork_13
                 else
                     MessageBox.Show("Введенное значение не верное");
             }
+            else
+                MessageBox.Show("Введенное значение не верное");
         }
-
+        /// <summary>
+        /// Обработка кнопки с началом вклада на счет
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StartInvestmentButton_Click(object sender, RoutedEventArgs e)
         {
             var currentAc = (SaveAccount)CartListGrid.SelectedItem;
-            currentAc.StartInvestment(10);
+            
+            if (currentAc != null)
+            {
+                double amount;
+                if (Double.TryParse(InvestmentBox.Text, out amount) || !String.IsNullOrWhiteSpace(InvestmentBox.Text)) //проверка на ввод значения в TextBox 
+                    if (currentAc.StartInvestment(amount))
+                    {
+                        InvestmentStartDateBox.Text = $"{(currentAc as SaveAccount).StartInvestmentDate}";
+                        InvestmentCompleteDateBox.Text = $"{(currentAc as SaveAccount).CompleteInvestmentDate}";
+                        MessageBox.Show("Вы сделали вклад!");
+
+                    }
+                    else
+                        MessageBox.Show("На счету не достаточно средств, либо у вас уже есть активный вклад");
+                else
+                    MessageBox.Show("Некоректный ввод суммы для вклада");
+
+                
+            }
+            else
+                MessageBox.Show("Выберите счет");
+                
+
         }
 
         private void CompleteInvestmentButton_Click(object sender, RoutedEventArgs e)
         {
             var currentAc = (SaveAccount)CartListGrid.SelectedItem;
-            if (!currentAc.CheckInvestment()) MessageBox.Show("Еще не время");
+            TimeSpan timer = currentAc.CompleteInvestmentDate - currentAc.StartInvestmentDate; 
+            if (!currentAc.CheckInvestment())
+                MessageBox.Show($"До конца вклада еще {timer.TotalDays} дня");
                 
         }
     }

@@ -45,13 +45,13 @@ namespace HomeWork_13.Models
 
         public bool StartInvestment(double amount)
         {
-            if((Balance-amount)>=0 && InvestitionProcess)
+            if((Balance-amount)>=0 && !InvestitionProcess)
             {
                 StartInvestmentDate = DateTime.Now;
                 CompleteInvestmentDate = DateTime.Now.AddMonths(mounts);
                 interestBalance += amount;
                 Balance -= amount;
-                LogTransaction.Add($"Investment {amount}");
+                LogTransaction.Add($"Investment {amount} start at {StartInvestmentDate}");
                 InvestitionProcess = true;
                 return true;
             }
