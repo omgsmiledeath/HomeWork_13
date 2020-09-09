@@ -111,7 +111,8 @@ namespace HomeWork_13
                         ListOfLogTransaction.ItemsSource = currAccount.LogTransaction;
                         SaveAccPanel.Visibility = Visibility.Collapsed;
                         GridCreditAccPanel.Visibility = Visibility.Visible;
-                        CreditBalanceBox.Text = $"{(currAccount as CreditAccount).CreditBalance}"; 
+                        CreditBalanceBlock.Text = $"{(currAccount as CreditAccount).CreditBalance}";
+                       
                     }
                    
                 }
@@ -196,7 +197,9 @@ namespace HomeWork_13
                 double amount;
                 if (double.TryParse(AddCreditBox.Text, out amount))
                     if (currentAc.GetCredit(amount))
-                        MessageBox.Show("Успех");
+                    {
+                        CreditBalanceBlock.Text =$"{currentAc.CreditBalance}";
+                    }
                     else
                         MessageBox.Show("Что то пошло не так");
                 else
@@ -213,7 +216,10 @@ namespace HomeWork_13
                 var currentAc = (CreditAccount)CartListGrid.SelectedItem;
                 double amount;
                 if (double.TryParse(CloseCreditBox.Text, out amount))
+                {
                     currentAc.CloseCredit(amount);
+                    CreditBalanceBlock.Text = $"{currentAc.CreditBalance}";
+                }
                 else
                     MessageBox.Show("Введенное значение не верное");
             }

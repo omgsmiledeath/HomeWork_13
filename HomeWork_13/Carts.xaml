@@ -123,8 +123,9 @@
 
                     <TextBlock Text="На вашем счету задолженость" Grid.Column="0"
                                Grid.Row="2" TextWrapping="Wrap"/>
-                    <TextBlock x:Name="CreditBalanceBox" Grid.Column="1"
+                    <TextBlock x:Name="CreditBalanceBlock" Grid.Column="1"
                                Grid.Row="2"/>
+                    
 
                 </Grid>
 

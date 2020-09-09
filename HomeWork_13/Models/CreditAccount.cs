@@ -13,23 +13,21 @@ namespace HomeWork_13.Models
         private double creditBalance;
         private double creditRate;
 
-        public double Limit { get => limit;
-             set
-            { limit = value;
-                OnPropertyChanged("Limit");
-            }
+        public double Limit {
+            get => limit;
+             
         }
 
         public double CreditBalance { get => creditBalance; set
             {
-                limit = value;
+                creditBalance = value;
                 OnPropertyChanged("CreditBalance");
             }
         }
 
         public CreditAccount(double amount,double limit,double creditRate = 10) : base(amount,AccountTypes.Credit)
         {
-            this.Limit = limit;
+            this.limit = limit;
             this.creditRate = creditRate;
             CreditBalance = 0;
             
@@ -39,7 +37,7 @@ namespace HomeWork_13.Models
         {
             if(CreditBalance+amount<=Limit)
             {
-                CreditBalance += amount+amount*creditRate;
+                CreditBalance += amount+amount*creditRate/100;
                 Balance += amount;
                 LogTransaction.Add($"Get credit at {amount}");
                 return true;
