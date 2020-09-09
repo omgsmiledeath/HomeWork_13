@@ -14,6 +14,7 @@ namespace HomeWork_13.Models
             loyality = 100;
         }
 
+        
 
     }
 }

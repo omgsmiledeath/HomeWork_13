@@ -12,19 +12,34 @@ namespace HomeWork_13.Models
         private double limit;
         private double creditBalance;
         private double creditRate;
-        public CreditAccount(double amount,double limit) : base(amount,AccountTypes.Credit)
+
+        public double Limit { get => limit;
+             set
+            { limit = value;
+                OnPropertyChanged("Limit");
+            }
+        }
+
+        public double CreditBalance { get => creditBalance; set
+            {
+                limit = value;
+                OnPropertyChanged("CreditBalance");
+            }
+        }
+
+        public CreditAccount(double amount,double limit,double creditRate = 10) : base(amount,AccountTypes.Credit)
         {
-            this.limit = limit;
-            this.creditRate = 10;
-            creditBalance = 0;
+            this.Limit = limit;
+            this.creditRate = creditRate;
+            CreditBalance = 0;
             
         }
 
         public bool GetCredit(double amount)
         {
-            if(creditBalance+amount!=limit)
+            if(CreditBalance+amount<=Limit)
             {
-                limit += amount+amount*creditRate;
+                CreditBalance += amount+amount*creditRate;
                 Balance += amount;
                 LogTransaction.Add($"Get credit at {amount}");
                 return true;
@@ -34,12 +49,17 @@ namespace HomeWork_13.Models
 
         public bool CloseCredit(double amount)
         {
-            if ((Balance - amount >= 0) && (limit-amount>=0))
+            if ((Balance - amount >= 0) && (CreditBalance-amount>=0))
             {
-                limit -= amount;
+                CreditBalance -= amount;
                 Balance -= amount;
                 LogTransaction.Add($"Close credit at {amount}");
-                if (limit == 0) creditRate -= 0.2;
+                if (CreditBalance <= 0)
+                {
+                    Balance += Math.Abs(creditBalance);
+                    creditBalance = 0;
+                    creditRate -= 0.2;
+                }
                 return true;
             }
             return false;

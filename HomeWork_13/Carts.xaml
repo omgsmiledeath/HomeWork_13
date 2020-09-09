@@ -5,33 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeWork_13"
         mc:Ignorable="d"
-        Title="Carts" Height="450" Width="800">
-<Grid>
-    
+        Title="Carts" MinHeight="340.542" MinWidth="634.333"
+        Height="400" Width="700">
+    <Grid>
+
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="320"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-    
+
         <StackPanel Grid.Column="0">
             <DataGrid x:Name="CartListGrid" 
                      AutoGenerateColumns="True" SelectionChanged="CartListGrid_SelectionChanged"/>
-            <Button x:Name="OpenSave" 
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="OpenSave" 
                     Content="Открыть сберегательный счет"
                     Click="OpenSave_Click"
                     Width="200" Height="30"
                     Margin="10 10 10 10"/>
-            <Button x:Name="OpenCredit"
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="OpenCredit"
                     Content="Открыть кредитный счет" 
                     Click="OpenCredit_Click"
                     Width="200" Height="30"
                     Margin="10 0 10 10"/>
+                <StackPanel Orientation="Vertical" Width="100">
+                    <TextBlock Text="Лимит по кредиту" FontSize="10"/>
+                    <TextBox x:Name="CreditLimitBox" Width="70"/>
+                </StackPanel>
+            </StackPanel>
+            
             <!--#region Грид с элементами работы со счетами -->
-            <Grid x:Name="AccountGrid" Visibility="Visible">
+            <Grid x:Name="AccountGrid" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    
+
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
@@ -53,56 +63,78 @@
 
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="100"/>
                             <RowDefinition Height="150"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        
-                        <Button x:Name="StartInvestmentButton" Margin="5 5 5 5"
-                                Grid.Column="0" Grid.Row="0"
-                        Content="Сделать вклад"  Click="StartInvestmentButton_Click"/>
-                        <TextBox x:Name="InvestmentBox" Margin="5 5 5 5"
-                                 Grid.Column="1" Grid.Row="0"/>
+                       
+                            <Button x:Name="StartInvestmentButton" Margin="15 15 15 15"
+                                    Grid.Column="0" Grid.Row="0"
+                            Content="Сделать вклад"  Click="StartInvestmentButton_Click"/>
+
+
+
+                        <StackPanel Orientation="Vertical" Width="100" 
+                                    Grid.Column="1" Grid.Row="0"
+                                    VerticalAlignment="Center">
+                            <TextBlock Text="На сколько месяцев" FontSize="10"/>
+                            <TextBox x:Name="InvestmentMountBox" Width="70"/>
+                            <TextBlock Text="Сумма вклада" FontSize="10"/>
+                            <TextBox x:Name="InvestmentBox" Width="70"/>
+                        </StackPanel>
                         <StackPanel x:Name="SaveAccountDatePanel" Grid.ColumnSpan="2" Grid.Row="1" >
-                        <Button x:Name="CompleteInvestmentButton" Margin="25 5 25 5"
+                            <Button x:Name="CompleteInvestmentButton" Margin="25 5 25 5"
                         Content="Забрать вклад" Click="CompleteInvestmentButton_Click" 
                                 />
-                        <TextBox x:Name="InvestmentStartDateBox" IsReadOnly="True"/>
-                        <TextBox x:Name="InvestmentCompleteDateBox" IsReadOnly="True" />
+                            <TextBox x:Name="InvestmentStartDateBox" IsReadOnly="True"/>
+                            <TextBox x:Name="InvestmentCompleteDateBox" IsReadOnly="True" />
 
                         </StackPanel>
                     </Grid>
                 </StackPanel>
                 <!--#endregion-->
 
-                
-                    <Grid x:Name="GridCreditAccPanel"
+
+                <Grid x:Name="GridCreditAccPanel"
                           Visibility="Collapsed"
                              Grid.ColumnSpan="2" Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
 
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="150"/>
-                        </Grid.RowDefinitions>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                        <Button x:Name="StartCredit" Margin="5 5 5 5"
+                    <Button x:Name="AddCredit" Margin="5 5 5 5"
                                 Grid.Column="0" Grid.Row="0"
-                        Content="Взять кредит"  Click="StartInvestmentButton_Click"/>
-                        <TextBox x:Name="CreditBox" Margin="5 5 5 5"
+                        Content="Взять кредит"  Click="AddCreditButton_Click"/>
+                    <TextBox x:Name="AddCreditBox" Margin="5 5 5 5"
                                  Grid.Column="1" Grid.Row="0"/>
-                        
-                    </Grid>
-               
+                    <Button x:Name="CloseCredit" Margin="5 5 5 5"
+                                Grid.Column="0" Grid.Row="1"
+                        Content="Погасить кредит"  Click="CloseCreditButton_Click"/>
+                    <TextBox x:Name="CloseCreditBox" Margin="5 5 5 5"
+                                 Grid.Column="1" Grid.Row="1"/>
+
+                    <TextBlock Text="На вашем счету задолженость" Grid.Column="0"
+                               Grid.Row="2" TextWrapping="Wrap"/>
+                    <TextBlock x:Name="CreditBalanceBox" Grid.Column="1"
+                               Grid.Row="2"/>
+
+                </Grid>
+
 
 
             </Grid>
             <!--#endregion-->
-            
+
         </StackPanel>
-    
+
         <StackPanel Grid.Column="1">
             <ListBox x:Name="ListOfLogTransaction" 
                      Width="300" Height="300">
@@ -114,7 +146,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            
+
         </StackPanel>
     </Grid>
 </Window>

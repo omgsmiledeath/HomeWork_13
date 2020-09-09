@@ -49,7 +49,7 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenSave_Click(object sender, RoutedEventArgs e)
         {
-            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Debit, 100, 6))
+            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Debit,0,0))
                 MessageBox.Show("Успех");
             else
                 MessageBox.Show("Такой счет уже имеется");
@@ -62,10 +62,19 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenCredit_Click(object sender, RoutedEventArgs e)
         {
-            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Credit, 111, 6000000))
-                MessageBox.Show("Успех");
+            if (!String.IsNullOrWhiteSpace(CreditLimitBox.Text))
+            {
+                double limit;
+                if (Double.TryParse(CreditLimitBox.Text, out limit))
+                    if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Credit,0,limit))
+                        MessageBox.Show("Успех");
+                    else
+                        MessageBox.Show("Такой счет уже имеется");
+                else
+                    MessageBox.Show("Не подходящее значение");
+            }
             else
-                MessageBox.Show("Такой счет уже имеется");
+                MessageBox.Show("Введите значение кредитного лимита");
         }
 
 
@@ -76,11 +85,15 @@ namespace HomeWork_13
                 if (CartListGrid.Items.Count != 0 && CartListGrid.SelectedItem as Account != null )
                 {
                     
-                    var currAccount = (Account)CartListGrid.SelectedItem;
-                    ListOfLogTransaction.ItemsSource = currAccount.LogTransaction;
-                    if (currAccount is SaveAccount)
+                    
+                    
+                    if (CartListGrid.SelectedItem is SaveAccount)
                     {
+                        var currAccount = (SaveAccount)CartListGrid.SelectedItem;
+                        ListOfLogTransaction.ItemsSource = currAccount.LogTransaction;
+                        
                         SaveAccPanel.Visibility = Visibility.Visible;
+                        GridCreditAccPanel.Visibility = Visibility.Collapsed;
                         if ((currAccount as SaveAccount).CompleteInvestmentDate == DateTime.MinValue)
                         {
                             InvestmentCompleteDateBox.Text = "Вклад еще не сделан";
@@ -94,14 +107,18 @@ namespace HomeWork_13
                     }
                     else
                     {
+                        var currAccount = (CreditAccount)CartListGrid.SelectedItem;
+                        ListOfLogTransaction.ItemsSource = currAccount.LogTransaction;
                         SaveAccPanel.Visibility = Visibility.Collapsed;
+                        GridCreditAccPanel.Visibility = Visibility.Visible;
+                        CreditBalanceBox.Text = $"{(currAccount as CreditAccount).CreditBalance}"; 
                     }
                    
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Что то пошло не так");
+                MessageBox.Show($"Что то пошло не так ({ex.Message})");
             }
         }
 
@@ -136,8 +153,9 @@ namespace HomeWork_13
             if (currentAc != null)
             {
                 double amount;
-                if (Double.TryParse(InvestmentBox.Text, out amount) || !String.IsNullOrWhiteSpace(InvestmentBox.Text)) //проверка на ввод значения в TextBox 
-                    if (currentAc.StartInvestment(amount))
+                int month;
+                if (Double.TryParse(InvestmentBox.Text, out amount) && !String.IsNullOrWhiteSpace(InvestmentBox.Text) && !String.IsNullOrWhiteSpace(InvestmentMountBox.Text) && Int32.TryParse(InvestmentMountBox.Text,out month)) //проверка на ввод значения в TextBox 
+                    if (currentAc.StartInvestment(amount,month))
                     {
                         InvestmentStartDateBox.Text = $"{(currentAc as SaveAccount).StartInvestmentDate}";
                         InvestmentCompleteDateBox.Text = $"{(currentAc as SaveAccount).CompleteInvestmentDate}";
@@ -156,7 +174,11 @@ namespace HomeWork_13
                 
 
         }
-
+        /// <summary>
+        /// Обработка кнопки по завершению вклада на аккаунте
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CompleteInvestmentButton_Click(object sender, RoutedEventArgs e)
         {
             var currentAc = (SaveAccount)CartListGrid.SelectedItem;
@@ -164,6 +186,39 @@ namespace HomeWork_13
             if (!currentAc.CheckInvestment())
                 MessageBox.Show($"До конца вклада еще {timer.TotalDays} дня");
                 
+        }
+
+        private void AddCreditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(AddCreditBox.Text)) //Проверка на пустой TextBox
+            {
+                var currentAc = (CreditAccount)CartListGrid.SelectedItem;
+                double amount;
+                if (double.TryParse(AddCreditBox.Text, out amount))
+                    if (currentAc.GetCredit(amount))
+                        MessageBox.Show("Успех");
+                    else
+                        MessageBox.Show("Что то пошло не так");
+                else
+                    MessageBox.Show("Введенное значение не верное");
+            }
+            else
+                MessageBox.Show("Введенное значение не верное");
+        }
+
+        private void CloseCreditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(CloseCreditBox.Text)) //Проверка на пустой TextBox
+            {
+                var currentAc = (CreditAccount)CartListGrid.SelectedItem;
+                double amount;
+                if (double.TryParse(CloseCreditBox.Text, out amount))
+                    currentAc.CloseCredit(amount);
+                else
+                    MessageBox.Show("Введенное значение не верное");
+            }
+            else
+                MessageBox.Show("Введенное значение не верное");
         }
     }
 }

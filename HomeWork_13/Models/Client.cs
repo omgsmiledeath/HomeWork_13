@@ -44,10 +44,11 @@ namespace HomeWork_13.Models
             Address = addr;
             Phone_number = phone;
             id = ++id_count;
+            loyality = 10;
             carts = new ObservableCollection<Account>();
         }
 
-        public bool CheckAndOpenAccount(Account.AccountTypes type,double amount,int mounts=0,double limit=0)
+        public bool CheckAndOpenAccount(Account.AccountTypes type,double amount,double limit)
         {
             if (type == Account.AccountTypes.Debit)
             {
@@ -55,7 +56,7 @@ namespace HomeWork_13.Models
                 {
                     if (el is SaveAccount) return false;
                 }
-                addDebitCart(amount, mounts);
+                addDebitCart(amount);
                 return true;
             }
             else
@@ -70,15 +71,21 @@ namespace HomeWork_13.Models
      
         }
 
-        private void addDebitCart(double amount,int mounts)
+        private void addDebitCart(double amount)
         {
-            carts.Add(new SaveAccount(amount, mounts));
+            if(loyality==100)
+                carts.Add(new SaveAccount(amount,4));
+            else
+                carts.Add(new SaveAccount(amount));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SaveAccount)));
         }
 
         private void addCreditCart(double amount, double limit)
         {
-            carts.Add(new CreditAccount(amount, limit));
+            if (loyality == 100)
+                carts.Add(new CreditAccount(amount, limit, 3));
+            else
+                carts.Add(new CreditAccount(amount, limit));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CreditAccount)));
         }
 
