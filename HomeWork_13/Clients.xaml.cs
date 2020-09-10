@@ -160,7 +160,8 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void AddClientButton_Click(object sender, RoutedEventArgs e)
         {
-            if(boxChecker())
+            if (boxChecker())
+            {
                 switch (thisClientType)
                 {
                     case ClientTypes.Individual:
@@ -187,9 +188,8 @@ namespace HomeWork_13
                                     PhoneBox.Text));
                         break;
                 }
-
-
-            BottonGridLane.Height = new GridLength(0);
+                BottonGridLane.Height = new GridLength(0);
+            }
         }
 
        private bool boxChecker()
@@ -240,6 +240,33 @@ namespace HomeWork_13
         private void AddClientMenuItem_Click(object sender, RoutedEventArgs e)
         {
             BottonGridLane.Height = new GridLength(50);
+        }
+
+
+        private void DellClientMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if(AccountListGrid?.SelectedItem is Client)
+            {
+                
+                switch (thisClientType)
+                {
+                    case ClientTypes.Individual:
+                        var selectedIndClient = (Individual)AccountListGrid.SelectedItem;
+                        if (individual.Contains(selectedIndClient))
+                            individual.Remove(selectedIndClient);
+                        break;
+                    case ClientTypes.Business:
+                        var selectedBusClient = (Business)AccountListGrid.SelectedItem;
+                        if (bussines.Contains(selectedBusClient))
+                            bussines.Remove(selectedBusClient);
+                        break;
+                    case ClientTypes.Vip:
+                        var selectedVipClient = (VipClient)AccountListGrid.SelectedItem;
+                        if (vip.Contains(selectedVipClient))
+                            vip.Remove(selectedVipClient);
+                        break;
+                }
+            }
         }
     }
 }

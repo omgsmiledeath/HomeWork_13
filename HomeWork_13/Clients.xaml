@@ -18,7 +18,8 @@
             <MenuItem Header="Действия" Height="auto" Width="auto">
                 <MenuItem  x:Name="AddClientMenuItem"
                     Header="Новый клиент" Click="AddClientMenuItem_Click"/>
-                <MenuItem Header="Удалить"/>
+                <MenuItem Header="Удалить"
+                          x:Name="DellClientMenu" Click="DellClientMenu_Click"/>
             </MenuItem>
         </Menu>
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    public abstract class Client :INotifyPropertyChanged 
+    public abstract class Client :INotifyPropertyChanged ,IEquatable<Client>
 
     {
         static long id_count;
@@ -89,8 +89,11 @@ namespace HomeWork_13.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CreditAccount)));
         }
 
-       
-
+        bool IEquatable<Client>.Equals(Client other)
+        {
+            if (this.Id == other.Id) return true;
+            return false;
+        }
     }
 
 
