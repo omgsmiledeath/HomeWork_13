@@ -28,6 +28,13 @@ namespace HomeWork_13
         private ObservableCollection<Business> bussines = new ObservableCollection<Business>(); //Список аккаунтов бизнес клиентов
         private ObservableCollection<VipClient> vip = new ObservableCollection<VipClient>(); //Список вип клиентов
 
+        enum ClientTypes{
+            Individual = 1,
+            Business = 2, 
+            Vip = 3
+        }
+
+        ClientTypes thisClientType;
         /// <summary>
         /// Конструктор по умолчанию
         /// </summary>
@@ -44,9 +51,9 @@ namespace HomeWork_13
         {
             InitializeComponent();
             this.individual = accountlist;
-            
+            this.thisClientType = ClientTypes.Individual;
             AccountListGrid.ItemsSource = individual;
-          
+            
         }
         /// <summary>
         /// Конструктор для отдела банка для работы с Бизнес клиентами
@@ -56,7 +63,7 @@ namespace HomeWork_13
         {
             InitializeComponent();
             this.bussines = accountlist;
-
+            this.thisClientType = ClientTypes.Business;
             AccountListGrid.ItemsSource = bussines;
            
         }
@@ -69,7 +76,7 @@ namespace HomeWork_13
             InitializeComponent();
 
             this.vip = accountList;
-
+            this.thisClientType = ClientTypes.Vip;
             AccountListGrid.ItemsSource = vip;
            
         }
@@ -130,7 +137,27 @@ namespace HomeWork_13
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             
+            switch (thisClientType)
+            {
+                case ClientTypes.Individual:
+                    
+                    break;
+                case ClientTypes.Business:
+                    break;
+                case ClientTypes.Vip:
+                    break;
+            }
            
+        }
+
+        private void AddClientButton_Click(object sender, RoutedEventArgs e)
+        {
+            BottonGridLane.Height = new GridLength(0);
+        }
+
+        private void AddClientMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            BottonGridLane.Height = new GridLength(50);
         }
     }
 }
