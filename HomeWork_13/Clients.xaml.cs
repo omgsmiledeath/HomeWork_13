@@ -191,7 +191,10 @@ namespace HomeWork_13
                 BottonGridLane.Height = new GridLength(0);
             }
         }
-
+       /// <summary>
+       /// Проверка на заполненность TextBox
+       /// </summary>
+       /// <returns></returns>
        private bool boxChecker()
         {
             switch (thisClientType)
@@ -242,12 +245,15 @@ namespace HomeWork_13
             BottonGridLane.Height = new GridLength(50);
         }
 
-
+        /// <summary>
+        /// Обработка нажатия на меню удаления клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DellClientMenu_Click(object sender, RoutedEventArgs e)
         {
             if(AccountListGrid?.SelectedItem is Client)
             {
-                
                 switch (thisClientType)
                 {
                     case ClientTypes.Individual:
