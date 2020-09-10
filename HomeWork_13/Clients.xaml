@@ -42,7 +42,8 @@
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" x:Name="AddClientStackPanel">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="ФИО" HorizontalAlignment="Center"/>
+                <TextBlock Text="ФИО" HorizontalAlignment="Center" 
+                           x:Name="NameTextBlock"/>
                 <TextBox Width="100" x:Name="NameBox"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
@@ -53,11 +54,11 @@
                 <TextBlock Text="Телефон" HorizontalAlignment="Center"/>
                 <TextBox Width="100" x:Name="PhoneBox"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" x:Name="DirectorPanel">
                 <TextBlock Text="Директор" HorizontalAlignment="Center"/>
                 <TextBox Width="100" x:Name="DirectorBox"/>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" x:Name="OrgTypePanel">
                 <TextBlock Text="Вид организации" HorizontalAlignment="Center"/>
                 <TextBox Width="100" x:Name="TypeOrgBox"/>
             </StackPanel>
