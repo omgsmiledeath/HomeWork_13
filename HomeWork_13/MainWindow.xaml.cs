@@ -72,5 +72,12 @@ namespace HomeWork_13
         {
             MainFrame.Content = new Clients(vipBank.AccountList);
         }
+
+        private void OpenAllAccountsPage(object sender, RoutedEventArgs e)
+        {
+            var list = new ObservableCollection<Account>(individualBank.AccountList.SelectMany(t=>t.Carts));
+            
+            MainFrame.Content = new AllAccounts(list);
+        }
     }
 }
