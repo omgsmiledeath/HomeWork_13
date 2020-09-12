@@ -107,6 +107,7 @@
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
                         <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -121,11 +122,15 @@
                     <TextBox x:Name="CloseCreditBox" Margin="5 5 5 5"
                                  Grid.Column="1" Grid.Row="1"/>
 
-                    <TextBlock Text="На вашем счету задолженость" Grid.Column="0"
+                    <TextBlock Text="На счету задолженость" Grid.Column="0"
                                Grid.Row="2" TextWrapping="Wrap"/>
                     <TextBlock x:Name="CreditBalanceBlock" Grid.Column="1"
                                Grid.Row="2"/>
-                    
+                    <TextBlock Text="Текущий кредитный лемит"
+                               Grid.Column="0" Grid.Row="3"/>
+                    <TextBlock x:Name="CurrentLimitBlock" 
+                               Grid.Column="1" Grid.Row="3"/>
+
 
                 </Grid>
 

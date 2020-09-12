@@ -112,7 +112,7 @@ namespace HomeWork_13
                         SaveAccPanel.Visibility = Visibility.Collapsed;
                         GridCreditAccPanel.Visibility = Visibility.Visible;
                         CreditBalanceBlock.Text = $"{(currAccount as CreditAccount).CreditBalance}";
-                       
+                        CurrentLimitBlock.Text = $"{(currAccount as CreditAccount).Limit}";
                     }
                    
                 }
