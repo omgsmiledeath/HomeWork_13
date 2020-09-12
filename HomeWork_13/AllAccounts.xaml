@@ -4,9 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:HomeWork_13"
-      mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="AllAccounts" Background="#FF91919B">
+      mc:Ignorable="d"
+      Title="AllAccounts" Background="#FF91919B" Height="439.655" Width="684.483">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -35,18 +34,19 @@
                 <StackPanel Orientation="Vertical" Margin="20 0 0 0">
                     <TextBlock Text="Входящий" FontSize="15"/>
                     <TextBlock x:Name="InCartNameTextBlock" Text="Счет не выбран"/>
-                    <TextBlock x:Name="InCartBalanceTextBlock" />
+                    <TextBlock x:Name="InCartBalanceTextBlock"
+                               Text="{Binding}"/>
                 </StackPanel>
                 <!--StackPanel данных перевода-->
                 <StackPanel Orientation="Vertical"
                             Margin="20">
                     <TextBox x:Name="TransactionAmountTextBox"
                              Margin="10 10 10 0">
-                        
+
                     </TextBox>
-                <Button x:Name="TransactionButton"
+                    <Button x:Name="TransactionButton"
                         Content="Перевести"
-                        Margin="5 5 5 0"
+                        Margin="5 5 5 0" Click="TransactionButton_Click"
                         />
                 </StackPanel>
             </StackPanel>
@@ -61,7 +61,7 @@
                         Width="70" Height="30" Margin="50 0 0 0"
                         Click="TransactionInputSelectButton_Click"/>
             </StackPanel>
-            
+
         </StackPanel>
     </Grid>
 </Page>

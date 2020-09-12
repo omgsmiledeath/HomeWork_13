@@ -130,17 +130,22 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void DepositButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!String.IsNullOrWhiteSpace(DepositBox.Text)) //Проверка на пустой TextBox
+            if (CartListGrid.SelectedItem is null)
+                MessageBox.Show("Выберите счет");
+            else
             {
-                var currentAc = (Account)CartListGrid.SelectedItem;
-                double amount;
-                if (double.TryParse(DepositBox.Text, out amount))
-                    currentAc.Deposit(amount);
+                if (!String.IsNullOrWhiteSpace(DepositBox.Text)) //Проверка на пустой TextBox
+                {
+                    var currentAc = (Account)CartListGrid.SelectedItem;
+                    double amount;
+                    if (double.TryParse(DepositBox.Text, out amount))
+                        currentAc.Deposit(amount);
+                    else
+                        MessageBox.Show("Введенное значение не верное");
+                }
                 else
                     MessageBox.Show("Введенное значение не верное");
             }
-            else
-                MessageBox.Show("Введенное значение не верное");
         }
         /// <summary>
         /// Обработка кнопки с началом вклада на счет

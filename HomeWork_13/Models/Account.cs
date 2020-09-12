@@ -133,7 +133,7 @@ namespace HomeWork_13.Models
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Account number :{this.id} has {this.Balance}";
+            return $"Account number :{this.CartNumber}";
         }
     }
 }
