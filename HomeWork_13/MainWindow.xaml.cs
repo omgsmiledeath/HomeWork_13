@@ -38,8 +38,10 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            individualBank.AddAccount(new Individual("Петров В.С.", "Жопниково", "2281488"));
-            individualBank.AddAccount(new Individual("Шмальц Ы.А.", "Пидрово", "221323488"));
+            individualBank.AddClient(new Individual("Петров В.С.", "Жопниково", "2281488"));
+            individualBank.AddClient(new Individual("Шмальц Ы.А.", "Пидрово", "221323488"));
+            businessBank.AddClient(new Business("Ростелеком", "валерград", "2281488","вася","пао"));
+            vipBank.AddClient(new VipClient("Шмальц Ы.А.", "Пидрово", "221323488"));
             MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
@@ -51,7 +53,7 @@ namespace HomeWork_13
         private void OpenIndividualClientsPage(object sender, RoutedEventArgs e)
         {
             
-            MainFrame.Content = new Clients(individualBank.AccountList);
+            MainFrame.Content = new Clients(individualBank.ClientList);
         }
         /// <summary>
         /// Обработка нажатия кнопки открытия страницы с бизнес клиентами
@@ -61,7 +63,7 @@ namespace HomeWork_13
         private void OpenBusinessClientsPage(object sender, RoutedEventArgs e)
         {
             
-            MainFrame.Content = new Clients(businessBank.AccountList);
+            MainFrame.Content = new Clients(businessBank.ClientList);
         }
         /// <summary>
         /// Обработка нажатия кнопки открытия страницы с вип клиентами
@@ -70,12 +72,15 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenVipClientsPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Clients(vipBank.AccountList);
+            MainFrame.Content = new Clients(vipBank.ClientList);
         }
 
         private void OpenAllAccountsPage(object sender, RoutedEventArgs e)
         {
-            var list = new ObservableCollection<Account>(individualBank.AccountList.SelectMany(t=>t.Carts));
+            var list = new ObservableCollection<Account>(individualBank.ClientList.SelectMany(t=>t.Carts)
+                .Concat(businessBank.ClientList.SelectMany(t=>t.Carts))
+                .Concat(vipBank.ClientList.SelectMany(t=>t.Carts))
+                );
             
             MainFrame.Content = new AllAccounts(list);
         }

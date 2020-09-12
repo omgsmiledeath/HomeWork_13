@@ -10,13 +10,13 @@ namespace HomeWork_13.Models
     class Bank <T>
         where T : Client
     {
-        private ObservableCollection<T> accountList = new ObservableCollection<T>();
+        private ObservableCollection<T> clientList = new ObservableCollection<T>();
 
-        public ObservableCollection<T> AccountList { get => accountList;}
+        public ObservableCollection<T> ClientList { get => clientList; }
 
-        public void AddAccount(T account)
+        public void AddClient(T client)
         {
-            accountList.Add(account);
+            clientList.Add(client);
         }
     }
 }
