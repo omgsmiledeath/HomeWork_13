@@ -6,10 +6,62 @@
       xmlns:local="clr-namespace:HomeWork_13"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AllAccounts">
+      Title="AllAccounts" Background="#FF91919B">
 
     <Grid>
-        <DataGrid x:Name="CartListGrid2" 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+        <!--DataGid для вывода всех счетов-->
+        <DataGrid x:Name="CartListGrid2" Grid.Column="0" 
                      AutoGenerateColumns="True" />
+        <!--Правая панель страницы-->
+        <StackPanel Grid.Column="1" 
+                    Orientation="Vertical"
+                    >
+            <TextBlock TextAlignment="Center"
+                       FontSize="20"
+                       Text="Панель переводов"/>
+            <!--StackPanel с номерами счетов -->
+            <StackPanel Orientation="Horizontal" >
+                <!--StackPanel данных о счете с которого выводят деньги -->
+                <StackPanel Orientation="Vertical" Margin="10 0 20 0">
+                    <TextBlock Text="Исходящий счет" FontSize="15"/>
+                    <TextBlock x:Name="OutCartNameTextBlock" Text="Счет не выбран"/>
+                    <TextBlock x:Name="OutCartBalanceTextBlock" />
+                </StackPanel>
+                <!--StackPanel данных о счете на которыый отправляют деньги -->
+                <StackPanel Orientation="Vertical" Margin="20 0 0 0">
+                    <TextBlock Text="Входящий" FontSize="15"/>
+                    <TextBlock x:Name="InCartNameTextBlock" Text="Счет не выбран"/>
+                    <TextBlock x:Name="InCartBalanceTextBlock" />
+                </StackPanel>
+                <!--StackPanel данных перевода-->
+                <StackPanel Orientation="Vertical"
+                            Margin="20">
+                    <TextBox x:Name="TransactionAmountTextBox"
+                             Margin="10 10 10 0">
+                        
+                    </TextBox>
+                <Button x:Name="TransactionButton"
+                        Content="Перевести"
+                        Margin="5 5 5 0"
+                        />
+                </StackPanel>
+            </StackPanel>
+            <!--StackPanel с кнопками -->
+            <StackPanel Orientation="Horizontal" >
+                <Button x:Name="TransactionOutputSelectButton"
+                        Content="Выбрать"
+                        Width="70" Height="30" Margin="10 0 30 0" Click="TransactionOutputSelectButton_Click" 
+                        />
+                <Button x:Name="TransactionInputSelectButton"
+                        Content="Выбрать"
+                        Width="70" Height="30" Margin="50 0 0 0"
+                        Click="TransactionInputSelectButton_Click"/>
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </Page>

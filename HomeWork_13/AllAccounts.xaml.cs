@@ -21,7 +21,8 @@ namespace HomeWork_13
     /// </summary>
     public partial class AllAccounts : Page
     {
-        private ObservableCollection<Account> listAccount;
+        private Account inAcc;
+        private Account outAcc;
 
         public AllAccounts()
         {
@@ -32,6 +33,28 @@ namespace HomeWork_13
         {
             InitializeComponent();
             CartListGrid2.ItemsSource = allacc;
+        }
+
+        private void TransactionOutputSelectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CartListGrid2.SelectedItem != null)
+            {
+                inAcc = (Account)CartListGrid2.SelectedItem;
+
+                OutCartBalanceTextBlock.Text = $"{inAcc.Balance}";
+                OutCartNameTextBlock.Text = inAcc.CartNumber;
+            }
+        }
+
+        private void TransactionInputSelectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CartListGrid2.SelectedItem != null)
+            {
+                outAcc = (Account)CartListGrid2.SelectedItem;
+
+                InCartBalanceTextBlock.Text = $"{outAcc.Balance}";
+                InCartNameTextBlock.Text = outAcc.CartNumber;
+            }
         }
     }
 }
