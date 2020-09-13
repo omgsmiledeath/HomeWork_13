@@ -7,12 +7,22 @@ using System.Threading.Tasks;
 
 namespace HomeWork_13.Models
 {
-    class Bank <T>
+    public class Bank<T>
         where T : Client
     {
-        private ObservableCollection<T> clientList = new ObservableCollection<T>();
+        public Bank()
+        {
+            
+        }
 
-        public ObservableCollection<T> ClientList { get => clientList; }
+        public Bank (ObservableCollection<T> clients)
+        {
+            clientList = clients;
+        }
+
+        private ObservableCollection<T> clientList;
+
+        public ObservableCollection<T> ClientList { get => clientList; set => clientList = value; }
 
         public void AddClient(T client)
         {

@@ -15,8 +15,12 @@
         <!-- Меню -->
         <Menu Grid.Row="0">
             <MenuItem Header="Файл" Height="auto" Width="auto">
-                <MenuItem Header="Открыть"></MenuItem>
-                <MenuItem Header="Сохранить"></MenuItem>
+                <MenuItem Header="Открыть"
+                          x:Name="OpenBaseMenu"
+                          Click="OpenBaseMenu_Click"></MenuItem>
+                <MenuItem Header="Сохранить"
+                          x:Name="SaveBaseMenu"
+                          Click="SaveBaseMenu_Click"></MenuItem>
                 <Separator/>
                 <MenuItem Header="Выход"></MenuItem>
             </MenuItem>

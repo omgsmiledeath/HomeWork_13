@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeWork_13.Models;
+using Microsoft.Win32;
+
 namespace HomeWork_13
 {
     /// <summary>
@@ -38,10 +40,10 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            individualBank.AddClient(new Individual("Петров В.С.", "Жопниково", "2281488"));
-            individualBank.AddClient(new Individual("Шмальц Ы.А.", "Пидрово", "221323488"));
-            businessBank.AddClient(new Business("Ростелеком", "валерград", "2281488","вася","пао"));
-            vipBank.AddClient(new VipClient("Шмальц Ы.А.", "Пидрово", "221323488"));
+            //individualBank.AddClient(new Individual("Петров В.С.", "Жопниково", "2281488"));
+            //individualBank.AddClient(new Individual("Шмальц Ы.А.", "Пидрово", "221323488"));
+            //businessBank.AddClient(new Business("Ростелеком", "валерград", "2281488","вася","пао"));
+            //vipBank.AddClient(new VipClient("Шмальц Ы.А.", "Пидрово", "221323488"));
             MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
@@ -83,6 +85,52 @@ namespace HomeWork_13
                 );
             
             MainFrame.Content = new AllAccounts(list);
+        }
+
+        private void OpenBaseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            Nullable<bool> result = ofd.ShowDialog();
+            string path = ofd.FileName;
+
+            BaseRepository repo;
+
+
+            var ser = new Serializer();
+            if (path != string.Empty)
+            {
+                if (ser.Load(path))
+                {
+                    repo = ser.Repo;
+                    if (repo.IndividualList != null)
+                        individualBank = repo.IndividualList;
+                    else individualBank = new Bank<Individual>();
+                    if (repo.BusinessList != null)
+                        businessBank = repo.BusinessList;
+                    else businessBank = new Bank<Business>();
+                    if (repo.VipClientsList != null)
+                        vipBank = repo.VipClientsList;
+                    else
+                        vipBank = new Bank<VipClient>();
+                }
+                else
+                    MessageBox.Show("Не подходящий файл");
+            }
+            else
+            {
+                MessageBox.Show("НЕ правильный путь");
+            }
+        }
+
+        private void SaveBaseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Serializer ser = new Serializer(
+                new BaseRepository(individualBank, businessBank, vipBank));
+            SaveFileDialog sfd = new SaveFileDialog();
+            Nullable<bool> result = sfd.ShowDialog();
+            string path = sfd.FileName;
+            if (path != string.Empty) ser.Save(path);
         }
     }
 }
