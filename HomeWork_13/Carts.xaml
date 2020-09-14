@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:HomeWork_13"
         mc:Ignorable="d"
         Title="Carts" MinHeight="340.542" MinWidth="634.333"
-        Height="400" Width="700">
+        Height="404.374" Width="771.435">
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="400"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
@@ -82,9 +82,9 @@
                             <TextBlock Text="Сумма вклада" FontSize="10"/>
                             <TextBox x:Name="InvestmentBox" Width="70"/>
                             <StackPanel Orientation="Horizontal" Margin="0 0 20 10">
-                            <CheckBox Content="С капитализацией" x:Name="WithCapitalizationCheckBox"
+                                <CheckBox Content="С капитализацией" x:Name="WithCapitalizationCheckBox"
                                       Margin="0 0 5 0" IsChecked="False" Checked="WithCapitalizationCheckBox_Checked"/>
-                            <CheckBox Content="Без капитализации" IsChecked="True"
+                                <CheckBox Content="Без капитализации" IsChecked="True"
                                       x:Name="WithOutCapitalizationCheckBox" Checked="WithOutCapitalizationCheckBox_Checked"/>
                             </StackPanel>
 
@@ -94,8 +94,8 @@
                         Content="Забрать вклад" Click="CompleteInvestmentButton_Click" 
                                 />
                             <StackPanel Grid.ColumnSpan="2" Grid.Row="2">
-                            <TextBox x:Name="InvestmentStartDateBox" IsReadOnly="True"/>
-                            <TextBox x:Name="InvestmentCompleteDateBox" IsReadOnly="True" />
+                                <TextBox x:Name="InvestmentStartDateBox" IsReadOnly="True"/>
+                                <TextBox x:Name="InvestmentCompleteDateBox" IsReadOnly="True" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>
@@ -149,9 +149,8 @@
 
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
-            <ListBox x:Name="ListOfLogTransaction" 
-                     Width="300" Height="300">
+        <StackPanel Grid.Column="1" Margin="0,0,137,10">
+            <ListBox x:Name="ListOfLogTransaction">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
