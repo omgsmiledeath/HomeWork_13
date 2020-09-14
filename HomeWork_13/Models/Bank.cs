@@ -20,7 +20,7 @@ namespace HomeWork_13.Models
             clientList = clients;
         }
 
-        private ObservableCollection<T> clientList;
+        private ObservableCollection<T> clientList = new ObservableCollection<T>();
 
         public ObservableCollection<T> ClientList { get => clientList; set => clientList = value; }
 

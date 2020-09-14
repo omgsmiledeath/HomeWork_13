@@ -13,17 +13,22 @@ namespace HomeWork_13.Models
         private Bank<Business> businessList;
         private Bank<VipClient> vipClientsList;
 
-        public Bank<Individual> IndividualList { get => individualList;  }
-        public Bank<Business> BusinessList { get => businessList;  }
-        public Bank<VipClient> VipClientsList { get => vipClientsList;  }
+        public Bank<Business> BusinessList { get => businessList; set => businessList = value; }
+        public Bank<Individual> IndividualList { get => individualList; set => individualList = value; }
+        public Bank<VipClient> VipClientsList { get => vipClientsList; set => vipClientsList = value; }
+
+        public BaseRepository()
+        {
+
+        }
 
         public BaseRepository(Bank<Individual> individuals,
             Bank<Business> businesses,
             Bank<VipClient> vipClients)
         {
-            this.individualList = individuals;
-            this.businessList = businesses;
-            this.vipClientsList = vipClients;
+            this.IndividualList = individuals;
+            this.BusinessList = businesses;
+            this.VipClientsList = vipClients;
         }
 
     }

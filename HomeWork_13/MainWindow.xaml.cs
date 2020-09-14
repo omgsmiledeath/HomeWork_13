@@ -132,5 +132,10 @@ namespace HomeWork_13
             string path = sfd.FileName;
             if (path != string.Empty) ser.Save(path);
         }
+
+        private void ExitMenu_Clikc(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
