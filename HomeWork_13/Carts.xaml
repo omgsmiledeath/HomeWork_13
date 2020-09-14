@@ -10,8 +10,8 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
@@ -35,7 +35,7 @@
                     <TextBox x:Name="CreditLimitBox" Width="70"/>
                 </StackPanel>
             </StackPanel>
-            
+
             <!--#region Грид с элементами работы со счетами -->
             <Grid x:Name="AccountGrid" >
                 <Grid.ColumnDefinitions>
@@ -45,7 +45,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="150"/>
+                    <RowDefinition Height="250"/>
                 </Grid.RowDefinitions>
 
                 <Button x:Name="DepositButton" Margin="5 5 5 5"
@@ -54,41 +54,49 @@
                 <TextBox x:Name="DepositBox" Margin="5 5 5 5"
                         Grid.Column="1" Grid.Row="0"/>
                 <!--#region Работа с SaveAccount-->
-                <StackPanel x:Name="SaveAccPanel" Visibility="Collapsed"
+                <StackPanel x:Name="SaveAccPanel" Visibility="Visible"
                              Grid.ColumnSpan="2" Grid.Row="1">
-                    <Grid x:Name="GrinInSaveAccPanel">
+                    <Grid x:Name="GrinInSaveAccPanel" Height="193">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="200"/>
                             <ColumnDefinition Width="*"/>
 
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100"/>
-                            <RowDefinition Height="150"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="69"/>
+                            <RowDefinition Height="0*"/>
                         </Grid.RowDefinitions>
-                       
-                            <Button x:Name="StartInvestmentButton" Margin="15 15 15 15"
+
+                        <Button x:Name="StartInvestmentButton" Margin="15 15 15 15"
                                     Grid.Column="0" Grid.Row="0"
                             Content="Сделать вклад"  Click="StartInvestmentButton_Click"/>
 
 
 
-                        <StackPanel Orientation="Vertical" Width="100" 
+                        <StackPanel Orientation="Vertical" 
                                     Grid.Column="1" Grid.Row="0"
-                                    VerticalAlignment="Center">
+                                    VerticalAlignment="Center" Height="85" Margin="10,16,0,0" >
                             <TextBlock Text="На сколько месяцев" FontSize="10"/>
                             <TextBox x:Name="InvestmentMountBox" Width="70"/>
                             <TextBlock Text="Сумма вклада" FontSize="10"/>
                             <TextBox x:Name="InvestmentBox" Width="70"/>
+                            <StackPanel Orientation="Horizontal" Margin="0 0 20 10">
+                            <CheckBox Content="С капитализацией" x:Name="WithCapitalizationCheckBox"
+                                      Margin="0 0 5 0" IsChecked="False" Checked="WithCapitalizationCheckBox_Checked"/>
+                            <CheckBox Content="Без капитализации" IsChecked="True"
+                                      x:Name="WithOutCapitalizationCheckBox" Checked="WithOutCapitalizationCheckBox_Checked"/>
+                            </StackPanel>
+
                         </StackPanel>
-                        <StackPanel x:Name="SaveAccountDatePanel" Grid.ColumnSpan="2" Grid.Row="1" >
+                        <StackPanel x:Name="SaveAccountDatePanel" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,-46" Grid.RowSpan="2" >
                             <Button x:Name="CompleteInvestmentButton" Margin="25 5 25 5"
                         Content="Забрать вклад" Click="CompleteInvestmentButton_Click" 
                                 />
+                            <StackPanel Grid.ColumnSpan="2" Grid.Row="2">
                             <TextBox x:Name="InvestmentStartDateBox" IsReadOnly="True"/>
                             <TextBox x:Name="InvestmentCompleteDateBox" IsReadOnly="True" />
-
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
