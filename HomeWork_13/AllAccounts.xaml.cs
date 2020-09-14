@@ -39,10 +39,18 @@ namespace HomeWork_13
         {
             if (CartListGrid2.SelectedItem != null)
             {
-                outAcc = (Account)CartListGrid2.SelectedItem;
-
-                OutCartBalanceTextBlock.Text = $"{outAcc.Balance}";
-                OutCartNameTextBlock.Text = outAcc.CartNumber;
+                
+                if ((inAcc != null) && (CartListGrid2.SelectedItem as Account).ID == inAcc.ID)
+                {
+                    MessageBox.Show("Выберите отличные друг от друга счета");
+                }
+                else
+                {
+                    outAcc = (Account)CartListGrid2.SelectedItem;
+                    OutCartBalanceTextBlock.Text = $"{outAcc.Balance}";
+                    OutCartNameTextBlock.Text = outAcc.CartNumber;
+                }
+                
             }
         }
 
@@ -50,10 +58,18 @@ namespace HomeWork_13
         {
             if (CartListGrid2.SelectedItem != null)
             {
-                inAcc = (Account)CartListGrid2.SelectedItem;
-
-                InCartBalanceTextBlock.DataContext = inAcc.Balance;
-                InCartNameTextBlock.Text = inAcc.CartNumber;
+                
+                if ((outAcc != null) && outAcc.ID == (CartListGrid2.SelectedItem as Account).ID)
+                {
+                    MessageBox.Show("Выберите отличные друг от друга счета");
+                }
+                else
+                {
+                    inAcc = (Account)CartListGrid2.SelectedItem;
+                    InCartBalanceTextBlock.Text = $"{inAcc.Balance}";
+                    InCartNameTextBlock.Text = inAcc.CartNumber;
+                }
+                
             }
         }
 
@@ -68,6 +84,8 @@ namespace HomeWork_13
                     {
                         if (outAcc.Withdraw(inAcc, amount))
                         {
+                            OutCartBalanceTextBlock.Text = $"{outAcc.Balance}";
+                            InCartBalanceTextBlock.Text = $"{inAcc.Balance}";
                             MessageBox.Show("Перевод успешно выполнен");
                         }
                         else
