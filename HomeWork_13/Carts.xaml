@@ -15,8 +15,7 @@
                 <MenuItem Header="Кредитный"></MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Вклад" x:Name="InvestmentMenu" Click="InvestmentMenu_Click"
-                      >
+            <MenuItem Header="Вклад" x:Name="InvestmentMenu" Click="InvestmentMenu_Click">
 
             </MenuItem>
             <MenuItem Header="Кредит">
