@@ -111,25 +111,24 @@ namespace HomeWork_13.Models
         /// </summary>
         private void CompleteInvestment()
         {
-            
-                
                 var span =   CompleteInvestmentDate - DateTime.Now;
                 var months = Math.Ceiling(span.TotalDays / 30.4);
-            if (months >= 12)
+            if (months >= Mounts)
             {
-                LogTransaction.Add($"Investment less than a month, denied");
+                LogTransaction.Add($"Try to complete Investment - result :less than a month, denied");
                 return;
             }
-            else
+            else if(months==0)
             {
-                months = 11 - months;
+                months = Mounts; //Делаем расчет на указанное количество месяцев при начале вклада
                 
-                InterestBalance = InterestBalance * Math.Pow((1 + InterestRate / 100 / Mounts), months );
+            }
+                InterestBalance = InterestBalance * Math.Pow((1 + InterestRate / 100 / Mounts), months);
                 Balance += InterestBalance;
                 LogTransaction.Add($"Investment complete for {months} months with {InterestBalance}");
                 InterestBalance = 0;
                 startInvestmentDate = DateTime.Now;
-            }
+          
             
         }
 
@@ -138,26 +137,11 @@ namespace HomeWork_13.Models
         /// </summary>
         private void CompleteSimpleInvestment()
         {
-
-
-
-
-            var span = CompleteInvestmentDate - DateTime.Now;
-                var months = Math.Ceiling(span.TotalDays / 30.4);
-
-
-
-            if (months >= 12)
-            {
-                LogTransaction.Add($"Investment less than a month, denied");
-                return;
-            }
-            else
-            {
-                months = 11 - months;
+                if(CompleteInvestmentDate<=DateTime.Now)
+            { 
                 double monthInterest = 0;
 
-                for (var i = 1; i < months; i++)
+                for (var i = 0; i < Mounts; i++)
                 {
                     monthInterest += InterestBalance * InterestRate / 100 / Mounts;
                     LogTransaction.Add($"Get investment for {i} month = { InterestBalance * InterestRate / 100 / Mounts}");
@@ -166,6 +150,11 @@ namespace HomeWork_13.Models
                 Balance += InterestBalance;
                 startInvestmentDate = DateTime.Now;
             }
+            else
+            {
+                LogTransaction.Add($"Try to complete Investment - result :less than a month, denied");
+            }
+
         }
 
 

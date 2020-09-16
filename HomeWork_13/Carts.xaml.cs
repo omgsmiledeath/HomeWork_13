@@ -193,10 +193,10 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void CompleteInvestmentButton_Click(object sender, RoutedEventArgs e)
         {
-            var currentAc = (SaveAccount)CartListGrid.SelectedItem;
-            TimeSpan timer = currentAc.CompleteInvestmentDate - currentAc.StartInvestmentDate; 
-            if (!currentAc.CheckInvestment())
-                MessageBox.Show($"До конца вклада еще {timer.TotalDays} дня");
+            (CartListGrid.SelectedItem as SaveAccount).CheckInvestment();
+            //TimeSpan timer = currentAc.CompleteInvestmentDate - currentAc.StartInvestmentDate;
+            //currentAc.CheckInvestment();
+
                 
         }
 
@@ -246,6 +246,29 @@ namespace HomeWork_13
         private void WithOutCapitalizationCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             WithCapitalizationCheckBox.IsChecked = !WithOutCapitalizationCheckBox.IsChecked;
+        }
+
+        private void InvestmentMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (CartListGrid.Items.Count != 0 && CartListGrid.SelectedItem as Account != null)
+            {
+                if (CartListGrid.SelectedItem is SaveAccount)
+                {
+                    var currAccount = (SaveAccount)CartListGrid.SelectedItem;
+                    SaveAccPanel.Visibility = Visibility.Visible;
+                    GridCreditAccPanel.Visibility = Visibility.Collapsed;
+                    if ((currAccount as SaveAccount).CompleteInvestmentDate == DateTime.MinValue)
+                    {
+                        InvestmentCompleteDateBox.Text = "Вклад еще не сделан";
+                        InvestmentStartDateBox.Text = "Вклад еще не сделан";
+                    }
+                    else
+                    {
+                        InvestmentCompleteDateBox.Text = $"{(currAccount as SaveAccount).CompleteInvestmentDate}";
+                        InvestmentStartDateBox.Text = $"{(currAccount as SaveAccount).StartInvestmentDate}";
+                    }
+                }
+            }
         }
     }
 }
