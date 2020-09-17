@@ -61,7 +61,10 @@
                         Width="70" Height="30" Margin="50 0 0 0"
                         Click="TransactionInputSelectButton_Click"/>
             </StackPanel>
-
+            <StackPanel Orientation="Horizontal" Margin="5 10 0 0">
+                <TextBlock Text="Поиск счета по номеру карты"/>
+                <TextBox x:Name="SearchTextBox" Width="150" Margin="10 0 0 0" TextChanged="SearchTextBox_TextChanged"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Page>

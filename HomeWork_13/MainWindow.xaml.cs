@@ -23,9 +23,9 @@ namespace HomeWork_13
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Bank<Business> businessBank = new Bank<Business>(); //Отдел банка с бизнес клиентами
-        private Bank<VipClient> vipBank = new Bank<VipClient>(); // Отдел банка с вип клиентами
-        private Bank<Individual> individualBank = new Bank<Individual>(); // Отдел банка с обычными клиентами
+        private Bank<Business> businessBank;
+        private Bank<VipClient> vipBank;
+        private Bank<Individual> individualBank;
 
         
         public MainWindow()
@@ -44,7 +44,10 @@ namespace HomeWork_13
             //individualBank.AddClient(new Individual("Шмальц Ы.А.", "Пидрово", "221323488"));
             //businessBank.AddClient(new Business("Ростелеком", "валерград", "2281488","вася","пао"));
             //vipBank.AddClient(new VipClient("Шмальц Ы.А.", "Пидрово", "221323488"));
-            MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
+             businessBank = new Bank<Business>(); //Отдел банка с бизнес клиентами
+        vipBank = new Bank<VipClient>(); // Отдел банка с вип клиентами
+         individualBank = new Bank<Individual>(); // Отдел банка с обычными клиентами
+        MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
         /// <summary>
@@ -96,12 +99,12 @@ namespace HomeWork_13
 
             BaseRepository repo;
 
-
             var ser = new Serializer();
             if (path != string.Empty)
             {
                 if (ser.Load(path))
                 {
+                    
                     repo = ser.Repo;
                     if (repo.IndividualList != null)
                         individualBank = repo.IndividualList;
@@ -113,14 +116,13 @@ namespace HomeWork_13
                         vipBank = repo.VipClientsList;
                     else
                         vipBank = new Bank<VipClient>();
+
+                    MainFrame.Content = new Clients(individualBank.ClientList);
                 }
                 else
                     MessageBox.Show("Не подходящий файл");
             }
-            else
-            {
-                MessageBox.Show("НЕ правильный путь");
-            }
+           
         }
 
         private void SaveBaseMenu_Click(object sender, RoutedEventArgs e)

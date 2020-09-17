@@ -23,7 +23,7 @@ namespace HomeWork_13
     {
         private Account inAcc;
         private Account outAcc;
-
+        private ObservableCollection<Account> allAccountsList;
         public AllAccounts()
         {
             InitializeComponent();
@@ -32,6 +32,7 @@ namespace HomeWork_13
         public AllAccounts(ObservableCollection<Account> allacc) :base()
         {
             InitializeComponent();
+            allAccountsList = allacc;
             CartListGrid2.ItemsSource = allacc;
         }
 
@@ -101,5 +102,11 @@ namespace HomeWork_13
             else
                 MessageBox.Show("Выбранны не все счета");
         }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CartListGrid2.ItemsSource = allAccountsList.Select((p)=>p).Where(p => p.CartNumber.Contains(SearchTextBox.Text)).ToList();
+          
+                }
     }
 }

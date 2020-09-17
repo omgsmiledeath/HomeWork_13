@@ -42,18 +42,7 @@ namespace HomeWork_13
 
             
         }
-        /// <summary>
-        /// Действие по нажатию кнопки открытия сберегательного счета
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OpenSave_Click(object sender, RoutedEventArgs e)
-        {
-            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Debit,0,0))
-                MessageBox.Show("Успех");
-            else
-                MessageBox.Show("Такой счет уже имеется");
-        }
+        
 
         /// <summary>
         /// Действие по нажатию кнопки открытия кредитного счета
@@ -66,10 +55,16 @@ namespace HomeWork_13
             {
                 double limit;
                 if (Double.TryParse(CreditLimitBox.Text, out limit))
-                    if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Credit,0,limit))
+                    if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Credit, 0, limit))
+                    {
+                        OpenCreditPanel.Visibility = Visibility.Collapsed;
                         MessageBox.Show("Успех");
+                    }
                     else
+                    {
+                        OpenCreditPanel.Visibility = Visibility.Collapsed;
                         MessageBox.Show("Такой счет уже имеется");
+                    }
                 else
                     MessageBox.Show("Не подходящее значение");
             }
@@ -269,6 +264,19 @@ namespace HomeWork_13
                     }
                 }
             }
+        }
+
+        private void OpenSaveMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Debit, 0, 0))
+                MessageBox.Show("Успех");
+            else
+                MessageBox.Show("Такой счет уже имеется");
+        }
+
+        private void OpenCreditMenu_Click(object sender, RoutedEventArgs e)
+        {
+            OpenCreditPanel.Visibility = Visibility.Visible;
         }
     }
 }
