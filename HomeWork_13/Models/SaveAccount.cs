@@ -62,12 +62,18 @@ namespace HomeWork_13.Models
         }
 
         
-
+        //для изменения процентов
         private void ChangeInterestRate(double rate)
         {
             interestRate = rate;
         }
-
+        /// <summary>
+        /// Заполняет данные для начала вклада
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <param name="month"></param>
+        /// <param name="flag"></param>
+        /// <returns></returns>
         public bool StartInvestment(double amount,int month,bool flag)
         {
             Mounts = month;
