@@ -17,13 +17,21 @@
                      AutoGenerateColumns="True" />
         <!--Правая панель страницы-->
         <StackPanel Grid.Column="1" 
-                    Orientation="Vertical"
+                    Orientation="Vertical" Background="#FFA6A4A4"
+                    
                     >
             <TextBlock TextAlignment="Center"
                        FontSize="20"
-                       Text="Панель переводов"/>
+                       Text="Панель переводов">
+                <TextBlock.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#FFFFEAEA" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBlock.Background>
+            </TextBlock>
             <!--StackPanel с номерами счетов -->
-            <StackPanel Orientation="Horizontal" >
+            <StackPanel Orientation="Horizontal" Background="#FFAAAAAA" >
                 <!--StackPanel данных о счете с которого выводят деньги -->
                 <StackPanel Orientation="Vertical" Margin="10 0 20 0">
                     <TextBlock Text="Исходящий счет" FontSize="15"/>
