@@ -8,7 +8,10 @@ namespace HomeWork_13.Models
 {
     public class VipClient : Client
     {
-        
+        public VipClient(): base()
+        {
+
+        }
         public VipClient(string name, string addr, string phone) : base(name, addr, phone)
         {
             loyality = 100;

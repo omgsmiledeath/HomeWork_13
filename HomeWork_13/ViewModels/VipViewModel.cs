@@ -8,30 +8,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using HomeWork_13.Models;
-namespace HomeWork_13.ViewModels
+
+namespace HomeWork_13.ViewModels 
 {
-    public class IndividualViewModel : INotifyPropertyChanged, IModelView
+    public class VipViewModel : INotifyPropertyChanged, IModelView
     {
-        public ObservableCollection<Individual> Clients { get; set; }
+        public ObservableCollection<VipClient> Clients { get; set; }
         public Visibility IsVisible { get; } = Visibility.Collapsed;
-        public IndividualViewModel(ObservableCollection<Individual> individuals)
+        public VipViewModel(ObservableCollection<VipClient> vipClients)
         {
-            this.Clients = individuals;
+            this.Clients = vipClients;
         }
 
-        public void addClient()
+        public void addClient(string name, string adress, string phone)
         {
-            Clients.Add(new Individual());
+            Clients.Add(new VipClient(name, adress, phone));
             OnPropertyChanged("AddClient");
         }
-        
-        public void delClient(Individual client)
+
+        public void delClient(VipClient client)
         {
             Clients.Remove(client);
             OnPropertyChanged("DelClient");
         }
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

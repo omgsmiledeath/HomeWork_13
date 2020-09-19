@@ -53,6 +53,12 @@ namespace HomeWork_13.Models
         }
         public ObservableCollection<Account> Carts { get => carts;  }
 
+        public Client()
+        {
+            id = ++id_count;
+            loyality = 10;
+            carts = new ObservableCollection<Account>();
+        }
         public Client(string name,string addr,string phone)
         {
             Client_full_name = name;

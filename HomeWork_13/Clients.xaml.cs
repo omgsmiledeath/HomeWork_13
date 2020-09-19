@@ -22,20 +22,8 @@ namespace HomeWork_13
     /// </summary>
     public partial class Clients: Page 
     {
-        private ObservableCollection<Individual> individual; //Список аккаунтов обычных клиентов
-        private ObservableCollection<Business> bussines; //Список аккаунтов бизнес клиентов
-        private ObservableCollection<VipClient> vip; //Список вип клиентов
 
-        enum ClientTypes{
-            Individual = 1,
-            Business = 2, 
-            Vip = 3
-        }
 
-        ClientTypes thisClientType;
-        /// <summary>
-        /// Конструктор по умолчанию
-        /// </summary>
         public Clients()
         {
             InitializeComponent();
@@ -46,27 +34,7 @@ namespace HomeWork_13
         /// Конструктор для отдела банка для работы с Бизнес клиентами
         /// </summary>
         /// <param name="accountlist"></param>
-        public Clients(ObservableCollection<Business> accountlist) : base()
-        {
-            InitializeComponent();
-            this.bussines = accountlist;
-            this.thisClientType = ClientTypes.Business;
-            AccountListGrid.ItemsSource = bussines;
-           
-        }
-        /// <summary>
-        /// Конструктор для отдела банка для работы с VipClient
-        /// </summary>
-        /// <param name="accountList"></param>
-        public Clients(ObservableCollection<VipClient> accountList) :base()
-        {
-            InitializeComponent();
-
-            this.vip = accountList;
-            this.thisClientType = ClientTypes.Vip;
-            AccountListGrid.ItemsSource = vip;
-           
-        }
+        
         /// <summary>
         /// Правило для автосоздания стлобцов DataGrid 
         /// </summary>
@@ -116,111 +84,18 @@ namespace HomeWork_13
 
         private void OpenCartInfo(object sender, RoutedEventArgs e)
         {
-            var item = (Button)e.OriginalSource;
-            Carts carts = new Carts((Client)item.DataContext);
-            carts.Show();
+            try
+            {
+                Carts carts = new Carts((Client)((Button)e.OriginalSource).DataContext);
+                carts.Show();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Сначало введите данные для клиента");
+            }
+            
         }
 
-       // private void Page_Loaded(object sender, RoutedEventArgs e)
-       // {
-            
-       //     switch (thisClientType)
-       //     {
-       //         case ClientTypes.Individual:
-       //             DirectorPanel.Visibility = Visibility.Collapsed;
-       //             OrgTypePanel.Visibility = Visibility.Collapsed;
-       //             break;
-       //         case ClientTypes.Business:
-       //             NameTextBlock.Text = "Название";
-       //             break;
-       //         case ClientTypes.Vip:
-       //             DirectorPanel.Visibility = Visibility.Collapsed;
-       //             OrgTypePanel.Visibility = Visibility.Collapsed;
-       //             break;
-       //     }
-           
-       // }
-       // /// <summary>
-       // /// Обработка кнопки добавление клиента
-       // /// </summary>
-       // /// <param name="sender"></param>
-       // /// <param name="e"></param>
-       // private void AddClientButton_Click(object sender, RoutedEventArgs e)
-       // {
-       //     if (boxChecker())
-       //     {
-       //         switch (thisClientType)
-       //         {
-       //             case ClientTypes.Individual:
-       //                 individual.Add(
-       //                     new Individual(
-       //                         NameBox.Text,
-       //                         AdressBox.Text,
-       //                         PhoneBox.Text));
-       //                 break;
-       //             case ClientTypes.Business:
-       //                 bussines.Add(
-       //                     new Business(
-       //                         NameBox.Text,
-       //                         AdressBox.Text,
-       //                         PhoneBox.Text,
-       //                         DirectorBox.Text,
-       //                         TypeOrgBox.Text));
-       //                 break;
-       //             case ClientTypes.Vip:
-       //                 vip.Add(
-       //                         new VipClient(
-       //                             NameBox.Text,
-       //                             AdressBox.Text,
-       //                             PhoneBox.Text));
-       //                 break;
-       //         }
-       //         BottonGridLane.Height = new GridLength(0);
-       //     }
-       // }
-       ///// <summary>
-       ///// Проверка на заполненность TextBox
-       ///// </summary>
-       ///// <returns></returns>
-       //private bool boxChecker()
-       // {
-       //     switch (thisClientType)
-       //     {
-       //         case ClientTypes.Individual:
-       //             if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(PhoneBox.Text)))
-       //             {
-       //                 MessageBox.Show("Заполните все поля");
-       //                 return false;
-       //             }
-       //             break;
-                        
-                    
-       //         case ClientTypes.Business:
-       //             if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(PhoneBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(DirectorBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(TypeOrgBox.Text)))
-       //             {
-       //                 MessageBox.Show("Заполните все поля");
-       //                 return false;
-       //             }
-       //             break;
-
-       //         case ClientTypes.Vip:
-       //             if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
-       //                 (string.IsNullOrWhiteSpace(PhoneBox.Text)))
-       //             {
-       //                 MessageBox.Show("Заполните все поля");
-       //                 return false;
-       //             }
-       //             break;
-       //     }
-       //     return true;
-       // }
 
         /// <summary>
         /// Обработка нажатия элемента меню с добавлением клиента
@@ -239,15 +114,53 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void DellClientMenu_Click(object sender, RoutedEventArgs e)
         {
-            if(AccountListGrid?.SelectedItem is Client)
+            if (AccountListGrid?.SelectedItem is Client)
             {
-
-                if(this.DataContext is IndividualViewModel)
+                if (this.DataContext is IndividualViewModel)
                 {
                     (this.DataContext as IndividualViewModel).delClient(AccountListGrid.SelectedItem as Individual);
-                }
-                
+                } 
+                else if(this.DataContext is BusinessViewModel)
+                    (this.DataContext as BusinessViewModel).delClient(AccountListGrid.SelectedItem as Business);
+                else
+                    (this.DataContext as VipViewModel).delClient(AccountListGrid.SelectedItem as VipClient);
             }
         }
+
+
+        // private void Page_Loaded(object sender, RoutedEventArgs e)
+        // {
+
+        //     switch (thisClientType)
+        //     {
+        //         case ClientTypes.Individual:
+        //             DirectorPanel.Visibility = Visibility.Collapsed;
+        //             OrgTypePanel.Visibility = Visibility.Collapsed;
+        //             break;
+        //         case ClientTypes.Business:
+        //             NameTextBlock.Text = "Название";
+        //             break;
+        //         case ClientTypes.Vip:
+        //             DirectorPanel.Visibility = Visibility.Collapsed;
+        //             OrgTypePanel.Visibility = Visibility.Collapsed;
+        //             break;
+        //     }
+
+        // }
+        /// <summary>
+        /// Обработка кнопки добавление клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddClientButton_Click(object sender, RoutedEventArgs e)
+        {
+
+                
+       
+            BottonGridLane.Height = new GridLength(0);
+        }
+        
+
+
     }
 }

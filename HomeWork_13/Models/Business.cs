@@ -13,6 +13,11 @@ namespace HomeWork_13.Models
         public string CompanyDirector { get => companyDirector; set => companyDirector = value; }
         public string Type { get => type; set => type = value; }
 
+
+        public Business() :base()
+        {
+        
+        }
         public Business(string name, string addr, string phone,string director,string type) : base(name, addr, phone)
         {
             loyality = 20;

@@ -54,14 +54,13 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenIndividualClientsPage(object sender, RoutedEventArgs e)
         {
-            IndividualViewModel individualVM = new IndividualViewModel(individualBank.ClientList);
-            // MainFrame.Content = new Clients(individualBank.ClientList);
-            Clients individClientsView = new Clients()
-            {
-                DataContext = individualVM
-            };
             
-            MainFrame.Content = individClientsView;
+            // MainFrame.Content = new Clients(individualBank.ClientList);
+            
+            MainFrame.Content = new Clients()
+            {
+                DataContext = new IndividualViewModel(individualBank.ClientList)
+            };
         }
         /// <summary>
         /// Обработка нажатия кнопки открытия страницы с бизнес клиентами
@@ -70,8 +69,11 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenBusinessClientsPage(object sender, RoutedEventArgs e)
         {
-            
-            MainFrame.Content = new Clients(businessBank.ClientList);
+
+            MainFrame.Content = new Clients()
+            {
+                DataContext = new BusinessViewModel(businessBank.ClientList)
+            };
         }
         /// <summary>
         /// Обработка нажатия кнопки открытия страницы с вип клиентами
@@ -80,17 +82,23 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenVipClientsPage(object sender, RoutedEventArgs e)
         {
-            MainFrame.Content = new Clients(vipBank.ClientList);
+            MainFrame.Content = new Clients()
+            {
+                DataContext = new VipViewModel(vipBank.ClientList)
+            };
         }
 
         private void OpenAllAccountsPage(object sender, RoutedEventArgs e)
         {
-            var list = new ObservableCollection<Account>(individualBank.ClientList.SelectMany(t=>t.Carts)
-                .Concat(businessBank.ClientList.SelectMany(t=>t.Carts))
-                .Concat(vipBank.ClientList.SelectMany(t=>t.Carts))
-                );
             
-            MainFrame.Content = new AllAccounts(list);
+            MainFrame.Content = new AllAccounts(
+                new ObservableCollection<Account>(
+                    individualBank.ClientList
+                    .SelectMany(t => t.Carts)
+                    .Concat(businessBank.ClientList.SelectMany(t => t.Carts))
+                    .Concat(vipBank.ClientList.SelectMany(t => t.Carts))
+                    )
+            );
         }
 
         private void OpenBaseMenu_Click(object sender, RoutedEventArgs e)
@@ -120,7 +128,7 @@ namespace HomeWork_13
                     else
                         vipBank = new Bank<VipClient>();
 
-                   
+                    MainFrame.Content = null;
                 }
                 else
                     MessageBox.Show("Не подходящий файл");

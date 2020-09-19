@@ -61,7 +61,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\BusinessViewModel.cs" />
+    <Compile Include="ViewModels\IModelView.cs" />
     <Compile Include="ViewModels\IndividualViewModel.cs" />
+    <Compile Include="ViewModels\VipViewModel.cs" />
     <Page Include="AllAccounts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
