@@ -120,7 +120,7 @@ namespace HomeWork_13
                     else
                         vipBank = new Bank<VipClient>();
 
-                    MainFrame.Content = new Clients(individualBank.ClientList);
+                   
                 }
                 else
                     MessageBox.Show("Не подходящий файл");

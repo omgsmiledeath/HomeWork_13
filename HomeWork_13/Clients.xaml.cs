@@ -14,7 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using HomeWork_13.ViewModels;
 namespace HomeWork_13
 {
     /// <summary>
@@ -41,18 +41,7 @@ namespace HomeWork_13
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Конструктор для отдела банка для работы с обычными клиентами
-        /// </summary>
-        /// <param name="accountlist"></param>
-        public Clients(ObservableCollection<Individual> accountlist) : base()
-        {
-            InitializeComponent();
-            this.individual = accountlist;
-            this.thisClientType = ClientTypes.Individual;
-            AccountListGrid.ItemsSource = individual;
-            
-        }
+
         /// <summary>
         /// Конструктор для отдела банка для работы с Бизнес клиентами
         /// </summary>
@@ -252,24 +241,12 @@ namespace HomeWork_13
         {
             if(AccountListGrid?.SelectedItem is Client)
             {
-                switch (thisClientType)
+
+                if(this.DataContext is IndividualViewModel)
                 {
-                    case ClientTypes.Individual:
-                        var selectedIndClient = (Individual)AccountListGrid.SelectedItem;
-                        if (individual.Contains(selectedIndClient))
-                            individual.Remove(selectedIndClient);
-                        break;
-                    case ClientTypes.Business:
-                        var selectedBusClient = (Business)AccountListGrid.SelectedItem;
-                        if (bussines.Contains(selectedBusClient))
-                            bussines.Remove(selectedBusClient);
-                        break;
-                    case ClientTypes.Vip:
-                        var selectedVipClient = (VipClient)AccountListGrid.SelectedItem;
-                        if (vip.Contains(selectedVipClient))
-                            vip.Remove(selectedVipClient);
-                        break;
+                    (this.DataContext as IndividualViewModel).delClient(AccountListGrid.SelectedItem as Individual);
                 }
+                
             }
         }
     }
