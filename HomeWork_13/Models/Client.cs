@@ -33,9 +33,24 @@ namespace HomeWork_13.Models
         }
 
         public long Id { get => id; }
-        public string Client_full_name { get => client_full_name; set => client_full_name = value; }
-        public string Address { get => address; set => address = value; }
-        public string Phone_number { get => phone_number; set => phone_number = value; }
+        public string Client_full_name { get => client_full_name; set 
+            { 
+                client_full_name = value;
+                OnPropertyChanged("FullName");
+            } 
+        }
+        public string Address { get => address; set 
+            { 
+                address = value;
+                OnPropertyChanged("Adress");
+            } 
+        }
+        public string Phone_number { get => phone_number; set 
+            {
+                phone_number = value;
+                OnPropertyChanged("Phone");
+            }
+        }
         public ObservableCollection<Account> Carts { get => carts;  }
 
         public Client(string name,string addr,string phone)

@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using HomeWork_13.Models;
 using Microsoft.Win32;
-
+using HomeWork_13.ViewModels;
 namespace HomeWork_13
 {
     /// <summary>
@@ -40,13 +40,10 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //individualBank.AddClient(new Individual("Петров В.С.", "Жопниково", "2281488"));
-            //individualBank.AddClient(new Individual("Шмальц Ы.А.", "Пидрово", "221323488"));
-            //businessBank.AddClient(new Business("Ростелеком", "валерград", "2281488","вася","пао"));
-            //vipBank.AddClient(new VipClient("Шмальц Ы.А.", "Пидрово", "221323488"));
-             businessBank = new Bank<Business>(); //Отдел банка с бизнес клиентами
+
+        businessBank = new Bank<Business>(); //Отдел банка с бизнес клиентами
         vipBank = new Bank<VipClient>(); // Отдел банка с вип клиентами
-         individualBank = new Bank<Individual>(); // Отдел банка с обычными клиентами
+        individualBank = new Bank<Individual>(); // Отдел банка с обычными клиентами
         MainFrame.NavigationUIVisibility = NavigationUIVisibility.Hidden;
         }
 
@@ -57,8 +54,14 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void OpenIndividualClientsPage(object sender, RoutedEventArgs e)
         {
+            IndividualViewModel individualVM = new IndividualViewModel(individualBank.ClientList);
+            // MainFrame.Content = new Clients(individualBank.ClientList);
+            Clients individClientsView = new Clients()
+            {
+                DataContext = individualVM
+            };
             
-            MainFrame.Content = new Clients(individualBank.ClientList);
+            MainFrame.Content = individClientsView;
         }
         /// <summary>
         /// Обработка нажатия кнопки открытия страницы с бизнес клиентами

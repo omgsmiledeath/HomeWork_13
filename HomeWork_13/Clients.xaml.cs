@@ -20,9 +20,7 @@ namespace HomeWork_13
     /// <summary>
     /// Логика взаимодействия для Clients.xaml
     /// </summary>
-    public partial class Clients: Page
-        
-       
+    public partial class Clients: Page 
     {
         private ObservableCollection<Individual> individual; //Список аккаунтов обычных клиентов
         private ObservableCollection<Business> bussines; //Список аккаунтов бизнес клиентов
@@ -134,106 +132,106 @@ namespace HomeWork_13
             carts.Show();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
+       // private void Page_Loaded(object sender, RoutedEventArgs e)
+       // {
             
-            switch (thisClientType)
-            {
-                case ClientTypes.Individual:
-                    DirectorPanel.Visibility = Visibility.Collapsed;
-                    OrgTypePanel.Visibility = Visibility.Collapsed;
-                    break;
-                case ClientTypes.Business:
-                    NameTextBlock.Text = "Название";
-                    break;
-                case ClientTypes.Vip:
-                    DirectorPanel.Visibility = Visibility.Collapsed;
-                    OrgTypePanel.Visibility = Visibility.Collapsed;
-                    break;
-            }
+       //     switch (thisClientType)
+       //     {
+       //         case ClientTypes.Individual:
+       //             DirectorPanel.Visibility = Visibility.Collapsed;
+       //             OrgTypePanel.Visibility = Visibility.Collapsed;
+       //             break;
+       //         case ClientTypes.Business:
+       //             NameTextBlock.Text = "Название";
+       //             break;
+       //         case ClientTypes.Vip:
+       //             DirectorPanel.Visibility = Visibility.Collapsed;
+       //             OrgTypePanel.Visibility = Visibility.Collapsed;
+       //             break;
+       //     }
            
-        }
-        /// <summary>
-        /// Обработка кнопки добавление клиента
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddClientButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (boxChecker())
-            {
-                switch (thisClientType)
-                {
-                    case ClientTypes.Individual:
-                        individual.Add(
-                            new Individual(
-                                NameBox.Text,
-                                AdressBox.Text,
-                                PhoneBox.Text));
-                        break;
-                    case ClientTypes.Business:
-                        bussines.Add(
-                            new Business(
-                                NameBox.Text,
-                                AdressBox.Text,
-                                PhoneBox.Text,
-                                DirectorBox.Text,
-                                TypeOrgBox.Text));
-                        break;
-                    case ClientTypes.Vip:
-                        vip.Add(
-                                new VipClient(
-                                    NameBox.Text,
-                                    AdressBox.Text,
-                                    PhoneBox.Text));
-                        break;
-                }
-                BottonGridLane.Height = new GridLength(0);
-            }
-        }
-       /// <summary>
-       /// Проверка на заполненность TextBox
-       /// </summary>
-       /// <returns></returns>
-       private bool boxChecker()
-        {
-            switch (thisClientType)
-            {
-                case ClientTypes.Individual:
-                    if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(PhoneBox.Text)))
-                    {
-                        MessageBox.Show("Заполните все поля");
-                        return false;
-                    }
-                    break;
+       // }
+       // /// <summary>
+       // /// Обработка кнопки добавление клиента
+       // /// </summary>
+       // /// <param name="sender"></param>
+       // /// <param name="e"></param>
+       // private void AddClientButton_Click(object sender, RoutedEventArgs e)
+       // {
+       //     if (boxChecker())
+       //     {
+       //         switch (thisClientType)
+       //         {
+       //             case ClientTypes.Individual:
+       //                 individual.Add(
+       //                     new Individual(
+       //                         NameBox.Text,
+       //                         AdressBox.Text,
+       //                         PhoneBox.Text));
+       //                 break;
+       //             case ClientTypes.Business:
+       //                 bussines.Add(
+       //                     new Business(
+       //                         NameBox.Text,
+       //                         AdressBox.Text,
+       //                         PhoneBox.Text,
+       //                         DirectorBox.Text,
+       //                         TypeOrgBox.Text));
+       //                 break;
+       //             case ClientTypes.Vip:
+       //                 vip.Add(
+       //                         new VipClient(
+       //                             NameBox.Text,
+       //                             AdressBox.Text,
+       //                             PhoneBox.Text));
+       //                 break;
+       //         }
+       //         BottonGridLane.Height = new GridLength(0);
+       //     }
+       // }
+       ///// <summary>
+       ///// Проверка на заполненность TextBox
+       ///// </summary>
+       ///// <returns></returns>
+       //private bool boxChecker()
+       // {
+       //     switch (thisClientType)
+       //     {
+       //         case ClientTypes.Individual:
+       //             if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(PhoneBox.Text)))
+       //             {
+       //                 MessageBox.Show("Заполните все поля");
+       //                 return false;
+       //             }
+       //             break;
                         
                     
-                case ClientTypes.Business:
-                    if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(PhoneBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(DirectorBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(TypeOrgBox.Text)))
-                    {
-                        MessageBox.Show("Заполните все поля");
-                        return false;
-                    }
-                    break;
+       //         case ClientTypes.Business:
+       //             if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(PhoneBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(DirectorBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(TypeOrgBox.Text)))
+       //             {
+       //                 MessageBox.Show("Заполните все поля");
+       //                 return false;
+       //             }
+       //             break;
 
-                case ClientTypes.Vip:
-                    if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
-                        (string.IsNullOrWhiteSpace(PhoneBox.Text)))
-                    {
-                        MessageBox.Show("Заполните все поля");
-                        return false;
-                    }
-                    break;
-            }
-            return true;
-        }
+       //         case ClientTypes.Vip:
+       //             if ((string.IsNullOrWhiteSpace(NameBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(AdressBox.Text)) ||
+       //                 (string.IsNullOrWhiteSpace(PhoneBox.Text)))
+       //             {
+       //                 MessageBox.Show("Заполните все поля");
+       //                 return false;
+       //             }
+       //             break;
+       //     }
+       //     return true;
+       // }
 
         /// <summary>
         /// Обработка нажатия элемента меню с добавлением клиента
