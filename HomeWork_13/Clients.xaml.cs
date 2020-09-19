@@ -22,19 +22,10 @@ namespace HomeWork_13
     /// </summary>
     public partial class Clients: Page 
     {
-
-
         public Clients()
         {
             InitializeComponent();
-        }
-
-
-        /// <summary>
-        /// Конструктор для отдела банка для работы с Бизнес клиентами
-        /// </summary>
-        /// <param name="accountlist"></param>
-        
+        } 
         /// <summary>
         /// Правило для автосоздания стлобцов DataGrid 
         /// </summary>
@@ -81,7 +72,6 @@ namespace HomeWork_13
             }
             
         }
-
         private void OpenCartInfo(object sender, RoutedEventArgs e)
         {
             try
@@ -94,17 +84,6 @@ namespace HomeWork_13
                 MessageBox.Show("Сначало введите данные для клиента");
             }
             
-        }
-
-
-        /// <summary>
-        /// Обработка нажатия элемента меню с добавлением клиента
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddClientMenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            BottonGridLane.Height = new GridLength(50);
         }
 
         /// <summary>
@@ -128,24 +107,7 @@ namespace HomeWork_13
         }
 
 
-        // private void Page_Loaded(object sender, RoutedEventArgs e)
-        // {
-
-        //     switch (thisClientType)
-        //     {
-        //         case ClientTypes.Individual:
-        //             DirectorPanel.Visibility = Visibility.Collapsed;
-        //             OrgTypePanel.Visibility = Visibility.Collapsed;
-        //             break;
-        //         case ClientTypes.Business:
-        //             NameTextBlock.Text = "Название";
-        //             break;
-        //         case ClientTypes.Vip:
-        //             DirectorPanel.Visibility = Visibility.Collapsed;
-        //             OrgTypePanel.Visibility = Visibility.Collapsed;
-        //             break;
-        //     }
-
+       
         // }
         /// <summary>
         /// Обработка кнопки добавление клиента

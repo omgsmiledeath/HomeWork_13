@@ -11,10 +11,10 @@ using HomeWork_13.Models;
 
 namespace HomeWork_13.ViewModels
 {
-    public class BusinessViewModel:INotifyPropertyChanged,IModelView
+    public class BusinessViewModel:INotifyPropertyChanged
     {
         public ObservableCollection<Business> Clients { get; set; }
-        public Visibility IsVisible { get; } = Visibility.Visible;
+        
         public BusinessViewModel(ObservableCollection<Business> businesses)
         {
             this.Clients = businesses;

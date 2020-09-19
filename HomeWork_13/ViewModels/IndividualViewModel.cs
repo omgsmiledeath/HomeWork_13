@@ -10,10 +10,10 @@ using System.Windows;
 using HomeWork_13.Models;
 namespace HomeWork_13.ViewModels
 {
-    public class IndividualViewModel : INotifyPropertyChanged, IModelView
+    public class IndividualViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Individual> Clients { get; set; }
-        public Visibility IsVisible { get; } = Visibility.Collapsed;
+        
         public IndividualViewModel(ObservableCollection<Individual> individuals)
         {
             this.Clients = individuals;

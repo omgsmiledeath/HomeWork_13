@@ -19,12 +19,7 @@
                           Click="OpenCreditMenu_Click"></MenuItem>
             </MenuItem>
 
-            <MenuItem Header="Вклад" x:Name="InvestmentMenu" Click="InvestmentMenu_Click">
-
-            </MenuItem>
-            <MenuItem Header="Кредит">
-
-            </MenuItem>
+            
 
         </Menu>
 

@@ -57,8 +57,8 @@ namespace HomeWork_13
                 if (Double.TryParse(CreditLimitBox.Text, out limit))
                     if (currentClient.CheckAndOpenAccount(Account.AccountTypes.Credit, 0, limit))
                     {
-                        OpenCreditPanel.Visibility = Visibility.Collapsed;
-                        MessageBox.Show("Успех");
+                        OpenCreditPanel.Visibility = Visibility.Visible;
+                        SaveAccPanel.Visibility = Visibility.Collapsed;
                     }
                     else
                     {

@@ -11,10 +11,10 @@ using HomeWork_13.Models;
 
 namespace HomeWork_13.ViewModels 
 {
-    public class VipViewModel : INotifyPropertyChanged, IModelView
+    public class VipViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<VipClient> Clients { get; set; }
-        public Visibility IsVisible { get; } = Visibility.Collapsed;
+      
         public VipViewModel(ObservableCollection<VipClient> vipClients)
         {
             this.Clients = vipClients;
