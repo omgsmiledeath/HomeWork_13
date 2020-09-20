@@ -151,34 +151,37 @@ namespace HomeWork_13
         {
             var currentAc = (SaveAccount)CartListGrid.SelectedItem;
             bool flag;
-
-            if ((bool)WithCapitalizationCheckBox.IsChecked)
-                flag = true;
-            else
-                flag = false;
-
-            if (currentAc != null)
+            if ((WithCapitalizationCheckBox.IsChecked == true) || (WithOutCapitalizationCheckBox.IsChecked == true))
             {
-                double amount;
-                int month;
-                if (Double.TryParse(InvestmentBox.Text, out amount) && !String.IsNullOrWhiteSpace(InvestmentBox.Text) && !String.IsNullOrWhiteSpace(InvestmentMountBox.Text) && Int32.TryParse(InvestmentMountBox.Text,out month)) //проверка на ввод значения в TextBox 
-                    if (currentAc.StartInvestment(amount,month,flag))
-                    {
-                        InvestmentStartDateBox.Text = $"{(currentAc as SaveAccount).StartInvestmentDate}";
-                        InvestmentCompleteDateBox.Text = $"{(currentAc as SaveAccount).CompleteInvestmentDate}";
-                        MessageBox.Show("Вы сделали вклад!");
-
-                    }
-                    else
-                        MessageBox.Show("На счету не достаточно средств, либо у вас уже есть активный вклад");
+                if ((bool)WithCapitalizationCheckBox.IsChecked)
+                    flag = true;
                 else
-                    MessageBox.Show("Некоректный ввод суммы для вклада");
+                    flag = false;
 
-                
+                if (currentAc != null)
+                {
+                    double amount;
+                    int month;
+                    if (Double.TryParse(InvestmentBox.Text, out amount) && !String.IsNullOrWhiteSpace(InvestmentBox.Text) && !String.IsNullOrWhiteSpace(InvestmentMountBox.Text) && Int32.TryParse(InvestmentMountBox.Text, out month)) //проверка на ввод значения в TextBox 
+                        if (currentAc.StartInvestment(amount, month, flag))
+                        {
+                            InvestmentStartDateBox.Text = $"{(currentAc as SaveAccount).StartInvestmentDate}";
+                            InvestmentCompleteDateBox.Text = $"{(currentAc as SaveAccount).CompleteInvestmentDate}";
+                            MessageBox.Show("Вы сделали вклад!");
+
+                        }
+                        else
+                            MessageBox.Show("На счету не достаточно средств, либо у вас уже есть активный вклад");
+                    else
+                        MessageBox.Show("Некоректный ввод суммы для вклада");
+
+
+                }
+                else
+                    MessageBox.Show("Выберите счет");
             }
             else
-                MessageBox.Show("Выберите счет");
-                
+                MessageBox.Show("Выберите тип капитализации");
 
         }
         /// <summary>
@@ -188,7 +191,9 @@ namespace HomeWork_13
         /// <param name="e"></param>
         private void CompleteInvestmentButton_Click(object sender, RoutedEventArgs e)
         {
-            (CartListGrid.SelectedItem as SaveAccount).CheckInvestment();
+
+            if (!(CartListGrid.SelectedItem as SaveAccount).CheckInvestment()) MessageBox.Show("У вас еще нет активных вкладов");
+            
             //TimeSpan timer = currentAc.CompleteInvestmentDate - currentAc.StartInvestmentDate;
             //currentAc.CheckInvestment();
 

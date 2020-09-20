@@ -95,9 +95,9 @@ namespace HomeWork_13.Models
 
         public bool CheckInvestment()
         {
-            //if(DateTime.Now>CompleteInvestmentDate)
-            //{
-                switch(CurrentInvestment)
+            if (InvestitionProcess)
+            {
+                switch (CurrentInvestment)
                 {
                     case (TypeInvestment.WithCapitalization):
                         CompleteInvestment();
@@ -106,10 +106,11 @@ namespace HomeWork_13.Models
                         CompleteSimpleInvestment();
                         break;
                 }
-                
                 return true;
-            //}
-            //return false;
+            }
+            return false; 
+              
+            
         }
 
         /// <summary>
@@ -134,8 +135,10 @@ namespace HomeWork_13.Models
                 LogTransaction.Add($"Investment complete for {months} months with {InterestBalance}");
                 InterestBalance = 0;
                 startInvestmentDate = DateTime.Now;
-          
-            
+                InvestitionProcess = false;
+
+
+
         }
 
         /// <summary>
@@ -155,6 +158,7 @@ namespace HomeWork_13.Models
                 InterestBalance += monthInterest;
                 Balance += InterestBalance;
                 startInvestmentDate = DateTime.Now;
+                InvestitionProcess = false;
             }
             else
             {

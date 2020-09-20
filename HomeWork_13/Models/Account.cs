@@ -45,7 +45,9 @@ namespace HomeWork_13.Models
         public double Balance
         { get => balance;  // Автосвойсвто для баланса
           set 
-            { balance = value;
+            { 
+                
+                balance = value;
                 OnPropertyChanged("Balance");
             } 
         } 
