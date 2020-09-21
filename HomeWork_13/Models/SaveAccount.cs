@@ -135,6 +135,7 @@ namespace HomeWork_13.Models
                 LogTransaction.Add($"Investment complete for {months} months with {InterestBalance}");
                 InterestBalance = 0;
                 startInvestmentDate = DateTime.Now;
+                if(DateTime.Now>CompleteInvestmentDate)
                 InvestitionProcess = false;
 
 
